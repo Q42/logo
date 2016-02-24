@@ -1,0 +1,84 @@
+/*     core      */
+
+q-green {
+  color: #84bc2d;
+}
+
+/*     page    */
+
+body {
+  margin: 0;
+  font: 24px/32px "San Francisco Text";
+}
+
+select {
+  font-size: 32px;
+}
+
+section {
+  width: 600px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+h2 {
+  color: #84bc2d;
+  font-size: 24px;
+  margin: 2em 0 0 0;
+}
+
+a {
+  color: inherit;
+}
+
+.code {
+  background: #EEE;
+  font: 16px monospace;
+  padding: 0.2em;
+}
+
+#manifesto h1,
+#manifesto p {
+  margin: 1em 0;
+}
+
+#factsheet {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: #000082;
+  color: white;
+}
+
+#factsheet h1, p {
+  width: 600px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+#getit {
+  font-size: 20px;
+}
+
+#getit .copypaste {
+  font: 16px monospace;
+  width: 100%;
+  color: #444;
+  background: #EEE;
+  border: 1px solid #CCC;
+  padding: 1em
+}
+
+#logo {
+  margin: 100px auto;
+  width: 100px;
+}
+
+#q42logo {
+  border: 1px solid black;
+}
+
+#codeplaceholder {
+  background: black;
+  color: #6F6;
+}
