@@ -1,17 +1,17 @@
 // Embedding logic using HTML5-tag / selector
 Q42Logo.Embeds = function(){
 	this.elements = [];
-  this.instances = [];
+	this.instances = [];
 
 	this.init();
 };
 
 Q42Logo.Embeds.prototype = {
-  querySelector: '*[data-type="q42-logo"], q42-logo',
+	querySelector: 'q42-logo',
 
 	init: function(){
 		this.elements = document.querySelectorAll(this.querySelector);
-    for(var i=0;i<this.elements.length;i++)
+		for(var i=0;i<this.elements.length;i++)
 			this.print(this.elements[i]);
 	},
 
@@ -23,11 +23,12 @@ Q42Logo.Embeds.prototype = {
 
 };
 
+// dynamic element detector
 addEventListener('DOMContentLoaded',function(){
 	var embedder = new Q42Logo.Embeds;
 	addEventListener('DOMNodeInserted',function(e){
 		if(!e.target) return;
-		if(e.target.tagName == 'Q42-LOGO' || e.target['dataset']['type'] == 'q42-logo') {
+		if(e.target.tagName == 'Q42-LOGO') {
 			embedder.print(e.target);
 		}
 		else if(e.target.querySelectorAll) {

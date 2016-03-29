@@ -31,11 +31,6 @@ Q42Logo.prototype = {
 		this._setSizeAf = requestAnimationFrame(this.setSizeDeferred);
 	},
 	setSizeDeferred: function(){
-		if(this.renderer.element) {
-			this.renderer.element.style.width = this.element.offsetWidth + 'px';
-			this.renderer.element.style.height = this.element.offsetHeight + 'px';
-		}
-
 		if(this.renderer.setSize)
 			this.renderer.setSize();
 	}
