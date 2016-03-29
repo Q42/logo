@@ -5,8 +5,15 @@ echo "(function(window,document){" > $target.full
 
 for file in logo embed main modules/canvas2d modules/svg
 do
-	cat src/$file.js >> $target.full
+	cat ./src/$file.js >> $target.full
 done
+
+# Specific non-default modules, pass their basenames as arguments
+for file in $@
+do
+	cat ./src/modules/$file.js >> $target.full
+done
+
 
 echo "})(window,document);" >> $target.full
 
