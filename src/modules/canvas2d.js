@@ -71,7 +71,10 @@ Q42Logo['Canvas'].prototype = {
 		ctx.bezierCurveTo(37.2, 37.3, 40.8, 35.9, 43.7, 33.4);
 		ctx.lineTo(47.5, 36.3);
 		ctx.closePath();
-		ctx.fillStyle = this.logo.colors.foreground;
+		if(this.logo.colors.foreground == 'transparent')
+			this.ctx.globalCompositeOperation = 'xor'
+		else
+			ctx.fillStyle = this.logo.colors.foreground;
 		ctx.fill();
 
 		// 4 inside
