@@ -8,7 +8,9 @@ function Q42Logo(element){
 		foreground: this.theme == 'green' && '#ffffff' || '#000000'
 	};
 
-	this.rendererName = element['dataset']['renderType'] || 'SVG';
+	if(!element['dataset']['renderType']) element['dataset']['renderType'] = 'SVG';
+
+	this.rendererName = element['dataset']['renderType'];
 	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['SVG'](this);
 
 	// prototype bindings to instance
