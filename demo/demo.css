@@ -1,9 +1,9 @@
 q42-logo {
-	display: block;
 	width: 420px;
 	height: 400px;
 	margin: 10px;
 	padding: 10px;
+	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
 }
 q42-logo[data-theme="white"] {
 	background: #444;

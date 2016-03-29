@@ -52,5 +52,5 @@ Q42Logo['SVG'].prototype = {
 
 // Default canvas css
 var style = document.createElement('style');
-style.textContent = 'q42-logo > svg { width: 100%; height: 100% }';
-document.head.appendChild(style);
+style.textContent = 'q42-logo > svg { width: 100%; height: 100%; }';
+document.head.insertBefore(style, document.head.firstChild);
