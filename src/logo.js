@@ -1,12 +1,11 @@
-// Logo vector data and output methods
+// Logo main constructor
 function Q42Logo(element){
   console.info('New logo!', element);
 
   this.element = element;
 
-  this.rendererName = null;
-  this.renderer = null;
-  this.element = null;
+  this.rendererName = element['dataset']['renderType'] || 'SVG';
+  this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['SVG'](this);
 
   // prototype bindings to instance
   this.setSize = this.setSize.bind(this);
@@ -20,8 +19,6 @@ function Q42Logo(element){
 
 Q42Logo.prototype = {
   init: function(){
-    this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['SVG'](this);
-
     this.renderer.init && this.renderer.init();
 
     addEventListener('resize', this.setSize);
@@ -34,7 +31,8 @@ Q42Logo.prototype = {
     this._setSizeAf = requestAnimationFrame(this.setSizeDeferred);
   },
   setSizeDeferred: function(){
-
+    if(this.renderer.setSize)
+      this.renderer.setSize();
   }
 };
 
