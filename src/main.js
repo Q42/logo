@@ -1,0 +1,1 @@
+// Main logo init script
