@@ -3,11 +3,6 @@ Q42Logo['SVG'] = function(logo){
 	this.logo = logo;
 	this.element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	this.element.setAttribute('viewBox', '0 0 333.2 500');
-	this.theme = logo.element['dataset']['theme'] || 'green';
-	this.colors = {
-		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
-		foreground: this.theme == 'green' && '#ffffff' || '#000000'
-	}
 };
 
 Q42Logo['SVG'].prototype = {
@@ -27,7 +22,7 @@ Q42Logo['SVG'].prototype = {
 		for(var x in this.paths) {
 			var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 			path.setAttribute('d', this.paths[x]);
-			path.setAttribute('fill', x == 'shape' && this.colors.background || this.colors.foreground);
+			path.setAttribute('fill', x == 'shape' && this.logo.colors.background || this.logo.colors.foreground);
 			this.element.appendChild(path);
 		}
 	}

@@ -2,6 +2,12 @@
 function Q42Logo(element){
 	this.element = element;
 
+	this.theme = element['dataset']['theme'] || 'green';
+	this.colors = {
+		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
+		foreground: this.theme == 'green' && '#ffffff' || '#000000'
+	};
+
 	this.rendererName = element['dataset']['renderType'] || 'SVG';
 	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['SVG'](this);
 
