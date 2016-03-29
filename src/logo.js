@@ -1,7 +1,5 @@
 // Logo main constructor
 function Q42Logo(element){
-	console.info('New logo!', element);
-
 	this.element = element;
 
 	this.rendererName = element['dataset']['renderType'] || 'SVG';
