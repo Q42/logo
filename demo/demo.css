@@ -8,3 +8,17 @@ q42-logo {
 q42-logo[data-theme="white"] {
 	background: #444;
 }
+
+q42-logo[data-render-type="SVG"] {
+	position: relative;
+	-webkit-perspective: 500px;
+	perspective: 500px;
+}
+q42-logo[data-render-type="SVG"] svg {
+	-webkit-transition: -webkit-transform 2s ease;
+	transition: transform 2s ease;
+}
+q42-logo[data-render-type="SVG"]:hover svg {
+	-webkit-transform: rotate3d(0,1,0,720deg);
+	transform: rotate3d(0,1,0,720deg);
+}
