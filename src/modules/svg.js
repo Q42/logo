@@ -4,6 +4,10 @@ Q42Logo['SVG'] = function(logo){
 	this.element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	this.element.setAttribute('viewBox', '0 0 333.2 500');
 	this.theme = logo.element['dataset']['theme'] || 'green';
+	this.colors = {
+		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
+		foreground: this.theme == 'green' && '#ffffff' || '#000000'
+	}
 };
 
 Q42Logo['SVG'].prototype = {
@@ -23,28 +27,7 @@ Q42Logo['SVG'].prototype = {
 		for(var x in this.paths) {
 			var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 			path.setAttribute('d', this.paths[x]);
-			switch(this.theme) {
-				case 'green':
-					switch(x) {
-						case 'shape':
-							path.setAttribute('fill', '#84bc2d');
-						break;
-						default:
-							path.setAttribute('fill', '#ffffff');
-						break;
-					}
-				break;
-				case 'white':
-					switch(x) {
-						case 'shape':
-							path.setAttribute('fill', '#ffffff');
-						break;
-						default:
-							path.setAttribute('fill', '#000000');
-						break;
-					}
-				break;
-			}
+			path.setAttribute('fill', x == 'shape' && this.colors.background || this.colors.foreground);
 			this.element.appendChild(path);
 		}
 	}
