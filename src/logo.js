@@ -5,7 +5,7 @@ function Q42Logo(element){
 	this.theme = element['dataset']['theme'] || 'green';
 	this.colors = {
 		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
-		foreground: this.theme == 'green' && '#ffffff' || '#000000'
+		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
 	};
 
 	if(!element['dataset']['renderType']) element['dataset']['renderType'] = 'SVG';
