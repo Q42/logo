@@ -1,2 +1,3 @@
-# Q42logo
-Q42 logorepo
+# Q42 logo
+
+The world's first code logo.

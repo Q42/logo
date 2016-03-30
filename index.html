@@ -4,7 +4,11 @@
 	<title>Q42 logo</title>
 	<meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="logo.js"></script>
+	<script src="page.js"></script>
 </head>
 
 <body>
@@ -12,7 +16,7 @@
 
 	<section id="manifesto">
 		<p>
-			At Q42, technology is our lens for creativity. So our logo itself is also
+			At Q42, technology is a lens for creativity. So our logo itself is also
 			technology: a code logo.
 		</p>
 		<p>
@@ -30,8 +34,9 @@
 	<section id="factsheet">
 		<h1>Nuts &amp; bolts</h1>
 		<p>
-			The Q42 logo is all bezier curves. The control points and coordinates are in the blueprint below. The Q-Green is
-			<span title="click to copy to clipboard">#84bc2d</a>.
+			The Q42 logo is all bezier curves. The control points and coordinates are in the blueprint below
+			for you to recreate for whatever purpose. The Q42 Green is
+			<span class="code" title="click to copy to clipboard">#84bc2d</span> or PMS 376.
 		</p>
 		<img src="Factsheet.svg" class="factsheet" title="Factsheet"></img>
 	</section>
@@ -39,52 +44,71 @@
 	<section id="getit">
 		<h1>How to use this logo</h1>
 		<ol>
-			<li>Copy/paste <span class='code'>&lt;script src="http://logo.q42.nl/logo.js"&gt;&lt;/script&gt</span></li>
-			<li>Include a logo using <span class='code'>&lt;q42logo&gt;</span>. Use CSS to style and position.</li>
+			<li>Add <span class='code'>&lt;script src="http://logo.q42.nl/logo.js"&gt;&lt;/script&gt</span></li>
+			<li>Place a logo using <span class='code'>&lt;q42logo&gt;</span>. Use CSS to style &amp; position.</li>
 		</ol>
 
-		<h2>The old fashioned way</h2>
+		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42logo&gt;</span>:</p>
+		<ul>
+			<li><span class='code'>data-type="svg|canvas|webgl"</span>, with canvas as default</li>
+			<li><span class='code'>data-theme="green|black|white"</span>, with green as default</li>
+		</ul>
+
+		<h1>The old&ndash;fashioned way</h1>
 		<p>Use the logo as a vector or image file (SVG or PNG). This is not recommended because it is boring.</p>
 
 		<div>
 			<span class="lhead">Color way</span>
-			<select>
-				<option>White on green</option>
-				<option>White (transparant text)</option>
-				<option>Black (transparent text)</option>
+			<select id="colorway">
+				<option value="">White on green</option>
+				<option value="-white">White (transparant text)</option>
+				<option value="-black">Black (transparent text)</option>
 			</select>
 		</div>
 		<div>
 			<span class="lhead">Format</span>
-			<select>
-				<option>SVG (recommended)</option>
-				<option>PNG (1440 px high)</option>
-				<option>PNG (720 px high)</option>
+			<select id="format">
+				<option value=".svg">SVG</option>
+				<option value="-big.png">PNG (1440 px high)</option>
+				<option value=".png">PNG (720 px high)</option>
 			</select>
 		</div>
 
 		<div>
-			<span class="lhead">Include</span>
-			<span class='code'>&lt;img src="http://logo.q42.nl/logo.svg"&gt;&lt;/img&gt;</span>
+			<span class="lhead"></span>
+			<span class="arrow">&darr;</span>
 		</div>
 
 		<div>
-			<span class="lhead">Download</span>
-			<a href="#">q42-logo.png (32 Kb)</a>.
+			<span class="lhead">Include</span>
+			<span class='code'>&lt;img src="http://logo.q42.nl/<span class="imgfilename"></span>"&gt;&lt;/img&gt;</span>
+		</div>
+
+		<div>
+			<span class="lhead">or download</span>
+			<a id="imgdownload" href="#"><span class="imgfilename"></span></a>
 		</div>
 
 
-		<h2>Even more old fashioned</h2>
+		<h1>Even more old&ndash;fashioned</h1>
 		<p>Rumors exist that outside of the modern world, some still use paper to get stuff done.
 			We don't know why or what for. But if someone asks for something called a 'vector file',
-			just give them <a href="q42logo.eps">this EPS file</a>. </p>
+			just give them <a href="q42-logo.eps">this EPS file</a>. </p>
 
-		<h2>Physical prototyping</h2>
+		<h1>Physical prototyping</h1>
 		<ul>
 			<li>To carve it in wood or metal on our <a href="https://www.inventables.com/technologies/carvey">Carvey</a>,
-			<a href="http://easel.inventables.com/">fire up Easel</a> and <a href="logo.svg">import this SVG file</a>.</li>
-			<li>To work it into a 3D printed model, import a <a href="q42logo.dxf" download>DXF</a>,
-			<a href="q42logo.stl" download>STL</a>, or <a href="logo.svg">SVG</a> file into your modeler.</li>
+			<a href="http://easel.inventables.com/">fire up Easel</a> and <a href="q42-logo.svg">import this SVG file</a>.</li>
+			<li>To work it into a 3D printed model, import a <a href="q42-logo.dxf" download>DXF</a>,
+			<a href="q42-logo.stl" download>STL</a>, or <a href="q42-logo.svg">SVG</a> file into your modeler.</li>
+		</ul>
+
+		<h1>Something else altogether</h1>
+		<p>Some awesome alternative logos:</p>
+		<ul>
+			<li><a href="#">Q42 - NERD</a></li>
+			<li><a href="#">Q42 - Rock Guitar Wings</a></li>
+			<li><a href="#">Q42 - A Hoppy Place</a></li>
 		</ul>
 
 	</section>
@@ -102,10 +126,11 @@
 			</ol>
 		</section>
 	</div>
-
-	<section id="colophon">
-		<p>A Q42 joint.</p>
-	</section>
+	<div id="colophonplaceholder">
+		<section id="colophon">
+			<p>&copy; <span class="year"></span> Q42</p>
+		</section>
+	</div>
 
 </body>
 
