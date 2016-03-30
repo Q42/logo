@@ -1,13 +1,31 @@
+/* common */
+
 .q-green {
   color: #84bc2d;
 }
 
 body, select, input {
-  font: 20px/32px sans-serif;
+  font: 20px/32px 'Work Sans', sans-serif;
+  color: #213;
+}
+
+h1, h2, h3 {
+  font: bold italic 50px 'Playfair Display', sans-serif;
+  color: #213;
 }
 
 body {
   margin: 0;
+}
+
+/* page elements and styles */
+
+#logo {
+  margin: 100px auto;
+  width: 30vw;
+  height: 30vh;
+  display: block;
+  padding: 20px;
 }
 
 section {
@@ -16,33 +34,29 @@ section {
   padding: 1em 0;
 }
 
+h1 {
+  font-size: 48px;
+  margin: 2em 0 0 0;
+}
+
 h2 {
   font-size: 24px;
   margin: 2em 0 0 0;
 }
 
 a {
-  color: inherit;
   color: #84bc2d;
   text-decoration: none;
 }
 
-.code {
-  background: #EEE;
-  color: #333;
-  font: 14px monospace;
-  padding: 0.3em;
-}
-
 .lhead {
   display: inline-block;
-  width: 120px;
-  text-align: right;
+  width: 140px;
 }
 
 #manifesto h1,
 #manifesto p {
-  margin: 1em 0;
+  margin: 3em 0;
   text-align: justify;
 }
 
@@ -59,6 +73,7 @@ a {
   width: 600px;
   margin: 0 auto;
   padding: 1em 0;
+  color: white;
 }
 
 #getit .copypaste {
@@ -70,17 +85,39 @@ a {
   padding: 1em
 }
 
-#logo {
-  margin: 100px auto;
-  width: 20vw;
-  height: 20vh;
-  display: block;
-  padding: 20px;
+#getit .code {
+  background: #EEE;
+  color: #333;
+  font: bold 14px monospace;
+  padding: 0.3em;
+}
+
+#getit .arrow {
+  padding: 0 0 0 4em;
 }
 
 #codeplaceholder {
   background: black;
   color: #4F4;
+  padding-bottom: 8em;
+}
+
+#codeplaceholder h1 {
+  color: #4F4;
+}
+
+#codeplaceholder a {
+  color: white;
+}
+
+#colophonplaceholder {
+  background: black;
+  color: white;
+  padding-bottom: 2em;
+}
+
+#colophon {
+  text-align: center;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
