@@ -1,45 +1,49 @@
-/*     core      */
-
-q-green {
+.q-green {
   color: #84bc2d;
 }
 
-/*     page    */
+body, select, input {
+  font: 20px/32px sans-serif;
+}
 
 body {
   margin: 0;
-  font: 24px/32px "San Francisco Text";
-}
-
-select {
-  font-size: 32px;
 }
 
 section {
   width: 600px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 1em 0;
 }
 
 h2 {
-  color: #84bc2d;
   font-size: 24px;
   margin: 2em 0 0 0;
 }
 
 a {
   color: inherit;
+  color: #84bc2d;
+  text-decoration: none;
 }
 
 .code {
   background: #EEE;
-  font: 16px monospace;
-  padding: 0.2em;
+  color: #333;
+  font: 14px monospace;
+  padding: 0.3em;
+}
+
+.lhead {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
 }
 
 #manifesto h1,
 #manifesto p {
   margin: 1em 0;
+  text-align: justify;
 }
 
 #factsheet {
@@ -50,14 +54,11 @@ a {
   color: white;
 }
 
-#factsheet h1, #factsheet p {
+#factsheet h1,
+#factsheet p {
   width: 600px;
   margin: 0 auto;
-  padding: 1em; 
-}
-
-#getit {
-  font-size: 20px;
+  padding: 1em 0;
 }
 
 #getit .copypaste {
@@ -71,13 +72,19 @@ a {
 
 #logo {
   margin: 100px auto;
-  width: 50vw;
-  height: 50vh;
+  width: 20vw;
+  height: 20vh;
   display: block;
   padding: 20px;
 }
 
 #codeplaceholder {
   background: black;
-  color: #6F6;
+  color: #4F4;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  section {
+    width: 90vw;
+  }
 }
