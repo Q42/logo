@@ -3,7 +3,7 @@ target="logo.js"
 
 echo "(function(window,document){" > $target.full
 
-for file in logo embeds canvas2d svg
+for file in logo embeds canvas2d svg plane webgl
 do
 	cat ./src/$file.js >> $target.full
 done
