@@ -1,6 +1,7 @@
 Q42Logo.WebGL = function(logo){
 	this.logo = logo;
 
+	this.aspect = 500/333.2;
 	this.ratio = window.devicePixelRatio || 1;
 
 	this.element = document.createElement('canvas');
@@ -71,11 +72,16 @@ Q42Logo.WebGL.prototype = {
 	draw: function(){
 		var gl = this.gl;
 		var min = Math.min(this.element.width, this.element.height);
+
+		if(this.element.height / this.element.width > 1) min*=this.aspect;
+		if(min > this.element.height) min = this.element.height;
+
 		gl.viewport(
 			(this.element.width - min)/2,
 			(this.element.height - min)/2,
 			min,min
 		);
+
 		gl.useProgram(this.program);
 
 		// send color
