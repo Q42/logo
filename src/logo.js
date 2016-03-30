@@ -47,5 +47,5 @@ window['Q42Logo'] = Q42Logo;
 
 // Default <q42-logo> css
 var style = document.createElement('style');
-style.textContent = 'q42-logo { display: inline-block; }';
+style.textContent = 'q42-logo { display: inline-block; } q42-logo > .fill { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);

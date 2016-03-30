@@ -6,9 +6,10 @@ Q42Logo.Canvas = function(logo){
 	this.width = 100/3*2;
 	this.height = this.width * this.aspect;
 
-	this.ratio = window.devicePixelRatio || 2;
+	this.ratio = window.devicePixelRatio || 1;
 
 	this.element = document.createElement('canvas');
+	this.element.className = 'fill';
 	this.ctx = this.element.getContext('2d');
 };
 
@@ -128,11 +129,6 @@ Q42Logo.Canvas.prototype = {
 		this.draw();
 	}
 };
-
-// Default canvas css
-var style = document.createElement('style');
-style.textContent = 'q42-logo > canvas { width: 100%; height: 100%; pointer-events: none; }';
-document.head.insertBefore(style, document.head.firstChild);
 
 // For minification
 Q42Logo['canvas'] = Q42Logo.Canvas;

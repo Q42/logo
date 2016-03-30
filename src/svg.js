@@ -3,13 +3,15 @@ var cnt = 0;
 Q42Logo.SVG = function(logo){
 	this.logo = logo;
 	this.index = cnt++;
-	this.element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	this.ns = 'http://www.w3.org/2000/svg';
+	this.element = document.createElementNS(this.ns, 'svg');
 	this.element.setAttribute('viewBox', '0 0 333.2 500');
+	this.element.setAttribute('class', 'fill');
 	if(this.logo.theme != 'green') {
-		this.defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-		this.mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
+		this.defs = document.createElementNS(this.ns, 'defs');
+		this.mask = document.createElementNS(this.ns, 'mask');
 		this.mask.id = 'mask_'+this.index;
-		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+		this.rect = document.createElementNS(this.ns, 'rect');
 		this.rect.setAttribute('width','100%');
 		this.rect.setAttribute('height','100%');
 		this.rect.setAttribute('fill','white');
@@ -34,7 +36,7 @@ Q42Logo.SVG.prototype = {
 
 	print: function(){
 		for(var x in this.paths) {
-			var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+			var path = document.createElementNS(this.ns, 'path');
 			path.setAttribute('d', this.paths[x]);
 			if(x != 'shape' && this.logo.colors.foreground == 'transparent') {
 				path.setAttribute('fill', 'black');
@@ -54,11 +56,6 @@ Q42Logo.SVG.prototype = {
 		}
 	}
 };
-
-// Default canvas css
-var style = document.createElement('style');
-style.textContent = 'q42-logo > svg { width: 100%; height: 100%; pointer-events: none; }';
-document.head.insertBefore(style, document.head.firstChild);
 
 // For minification
 Q42Logo['svg'] = Q42Logo.SVG;
