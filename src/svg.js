@@ -1,6 +1,6 @@
 // Render logo as SVG element
 var cnt = 0;
-Q42Logo['SVG'] = function(logo){
+Q42Logo.SVG = function(logo){
 	this.logo = logo;
 	this.index = cnt++;
 	this.element = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -19,7 +19,7 @@ Q42Logo['SVG'] = function(logo){
 	}
 };
 
-Q42Logo['SVG'].prototype = {
+Q42Logo.SVG.prototype = {
 	paths: {
 		shape: 'M166.6,500C214.8,345.7,273,319,316.9,232.9C371.2,126.5,282.5,0,166.6,0C50.7,0-37.9,126.5,16.4,232.9 C60.2,319,118.4,345.7,166.6,500z',
 		q: 'M131.5,243l-22.7,33.9h22.7V243z M90,277.8l41.4-57.9h18.8v56.9h11.3v16.4h-11.3v16.6h-18.7v-16.6H90V277.8z',
@@ -59,3 +59,6 @@ Q42Logo['SVG'].prototype = {
 var style = document.createElement('style');
 style.textContent = 'q42-logo > svg { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);
+
+// For minification
+Q42Logo['svg'] = Q42Logo.SVG;

@@ -8,10 +8,10 @@ function Q42Logo(element){
 		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
 	};
 
-	if(!element['dataset']['renderType']) element['dataset']['renderType'] = 'SVG';
+	if(!element['dataset']['renderType']) element['dataset']['renderType'] = 'svg';
 
 	this.rendererName = element['dataset']['renderType'];
-	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['SVG'](this);
+	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['svg'](this);
 
 	// prototype bindings to instance
 	this.setSize = this.setSize.bind(this);

@@ -1,5 +1,5 @@
 // Render logo as canvas2d-element
-Q42Logo['Canvas'] = function(logo){
+Q42Logo.Canvas = function(logo){
 	this.logo = logo;
 
 	this.aspect = 500/333.2;
@@ -12,7 +12,7 @@ Q42Logo['Canvas'] = function(logo){
 	this.ctx = this.element.getContext('2d');
 };
 
-Q42Logo['Canvas'].prototype = {
+Q42Logo.Canvas.prototype = {
 	init: function(){
 		this.logo.element.appendChild(this.element);
 	},
@@ -133,3 +133,6 @@ Q42Logo['Canvas'].prototype = {
 var style = document.createElement('style');
 style.textContent = 'q42-logo > canvas { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);
+
+// For minification
+Q42Logo['canvas'] = Q42Logo.Canvas;
