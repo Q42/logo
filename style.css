@@ -50,10 +50,10 @@ a {
   color: white;
 }
 
-#factsheet h1, p {
+#factsheet h1, #factsheet p {
   width: 600px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 1em; 
 }
 
 #getit {
