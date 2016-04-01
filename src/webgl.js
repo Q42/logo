@@ -13,10 +13,11 @@ Q42Logo.WebGL.prototype = {
 	vertexShader: [
 		"attribute vec2 pos;",
 		"uniform float time;",
+		"uniform vec2 ratio;",
 		"uniform vec2 mousePos;",
 		"void main()",
 		"{",
-				"gl_Position = vec4(pos.x,pos.y,0.0,1.0);",
+				"gl_Position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
 		"}"
 	].join("\n"),
 
@@ -80,7 +81,8 @@ Q42Logo.WebGL.prototype = {
 		gl.linkProgram(this.program);
 
 		// uniforms
-		this.uniformRefs['time'] = gl.getUniformLocation(this.program, 'time');
+		this.uniformRefs.time = gl.getUniformLocation(this.program, 'time');
+		this.uniformRefs.ratio = gl.getUniformLocation(this.program, 'ratio');
 		for(var x in this.uniforms) {
 			this.uniformRefs[x] = gl.getUniformLocation(this.program, x);
 			if(!this.uniformRefs[x]) {
@@ -128,16 +130,12 @@ Q42Logo.WebGL.prototype = {
 		// For dynamic uniforms in modules
 		if(this.updateValues instanceof Function) this.updateValues();
 
-		gl.viewport(
-			(this.element.width - min)/2,
-			(this.element.height - min)/2,
-			min,min
-		);
-
+		gl.viewport(0, 0, this.element.width,this.element.height);
 		gl.useProgram(this.program);
 
 		// send uniforms
 		gl.uniform1f(this.uniformRefs.time, performance.now());
+		gl.uniform2f(this.uniformRefs.ratio, min/this.element.width, min/this.element.height);
 		for(var x in this.uniforms) {
 			if(!this.uniformRefs[x]) continue;
 			gl['uniform'+this.uniforms[x]+'f'].apply(gl, [this.uniformRefs[x]].concat(Array.prototype.slice.call(this.uniformValues[x])));
