@@ -24,6 +24,11 @@ function Q42Logo(element){
 };
 
 Q42Logo.prototype = {
+	aspect: 500/333.2,
+	width: 100/3*2,
+	height: 100/3*2 * 500/333.2,
+	ratio: window.devicePixelRatio || 1,
+
 	init: function(){
 		this.renderer.init && this.renderer.init();
 
