@@ -21,11 +21,10 @@ body {
 /* page elements and styles */
 
 #logo {
-  margin: 100px auto;
+  margin: 50px auto;
   width: 30vw;
-  height: 30vh;
+  height: 40vh;
   display: block;
-  padding: 20px;
 }
 
 section {
@@ -61,7 +60,7 @@ a {
 }
 
 #factsheet {
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
   background: #000082;
