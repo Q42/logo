@@ -56,5 +56,5 @@ proto.leave = function(e){
 };
 proto.updateValues = function(){
 	if(!this.started) return;
-	this.uniformValues['amp'][0] = Math.min(1000,performance.now()-this.started)/1000;
+	this.uniformValues['amp'][0] = Math.min(1000,(performance.now()-this.started)/3)/1000;
 };
