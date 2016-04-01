@@ -10,20 +10,20 @@ q42-logo {
 	padding: 1vh;
 	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
 }
-q42-logo[data-theme="white"] {
+q42-logo[theme="white"] {
 	background: #444;
 }
 
-q42-logo[data-render-type="svg"] {
+q42-logo[renderer="svg"] {
 	position: relative;
 	-webkit-perspective: 500px;
 	perspective: 500px;
 }
-q42-logo[data-render-type="svg"] svg {
+q42-logo[renderer="svg"] svg {
 	-webkit-transition: -webkit-transform 1s ease;
 	transition: transform 1s ease;
 }
-q42-logo[data-render-type="svg"]:hover svg {
+q42-logo[renderer="svg"]:hover svg {
 	-webkit-transform: rotate3d(0,1,0,900deg);
 	transform: rotate3d(0,1,0,900deg);
 }
