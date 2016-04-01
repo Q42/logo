@@ -14,10 +14,12 @@ proto.vertexShader = [
 	"uniform vec2 mousePos;",
 	"varying vec2 mousePosF;",
 	"varying float ampF;",
+	"uniform vec2 ratio;",
 	"varying vec3 position;",
 	"void main()",
 	"{",
 		"position = vec3(pos*(1.-amp),0.) + amp * vec3(pos.x*mousePos.x+pos.x*sin((pos.y*time)/200.),-mousePos.y*pos.y+pos.y*cos(pos.x*time/1000.),pos.y*cos(time/2000.));",
+		"position.xy *= ratio;",
 		"mousePosF = mousePos;",
 		"ampF = amp;",
 		"gl_Position = vec4(position,1.0);",
@@ -42,7 +44,6 @@ proto.fragmentShader = [
 ].join("\n");
 
 proto.initModule = function(){
-	console.log('imod!');
 	this.logo.element.addEventListener('mouseenter', this.enter.bind(this));
 	this.logo.element.addEventListener('mouseleave', this.leave.bind(this));
 };
