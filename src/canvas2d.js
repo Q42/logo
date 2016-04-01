@@ -2,12 +2,6 @@
 Q42Logo.Canvas = function(logo){
 	this.logo = logo;
 
-	this.aspect = 500/333.2;
-	this.width = 100/3*2;
-	this.height = this.width * this.aspect;
-
-	this.ratio = window.devicePixelRatio || 1;
-
 	this.element = document.createElement('canvas');
 	this.element.className = 'fill';
 	this.ctx = this.element.getContext('2d');
@@ -31,12 +25,12 @@ Q42Logo.Canvas.prototype = {
 
 	drawLogo: function(){
 		var ctx = this.ctx;
-		var scale = 1/Math.max(this.width/this.element.width, this.height/this.element.height);
+		var scale = 1/Math.max(this.logo.width/this.element.width, this.logo.height/this.element.height);
 
 		// q42/Path
 		ctx.beginPath();
 		ctx.scale(scale,scale);
-		ctx.translate(-33.3,-33.3*this.aspect);
+		ctx.translate(-33.3,-33.3*this.logo.aspect);
 		ctx.moveTo(33.3, 100.0);
 		ctx.bezierCurveTo(43.0, 69.1, 54.6, 63.8, 63.4, 46.6);
 		ctx.bezierCurveTo(74.2, 25.3, 56.5, 0.0, 33.3, 0.0);
@@ -124,8 +118,8 @@ Q42Logo.Canvas.prototype = {
 	},
 
 	setSize: function(){
-		this.element.width = this.logo.element.clientWidth * this.ratio;
-		this.element.height = this.logo.element.clientHeight * this.ratio;
+		this.element.width = this.logo.element.clientWidth * this.logo.ratio;
+		this.element.height = this.logo.element.clientHeight * this.logo.ratio;
 		this.draw();
 	}
 };

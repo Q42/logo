@@ -5,13 +5,13 @@
 }
 
 body, select, input {
-  font: 20px/32px 'Work Sans', sans-serif;
-  color: #213;
+  font: 17px/27px 'Work Sans', sans-serif;
+  color: #333;
 }
 
 h1, h2, h3 {
   font: bold italic 50px 'Playfair Display', sans-serif;
-  color: #213;
+  color: #333;
 }
 
 body {

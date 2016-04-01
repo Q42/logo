@@ -7,6 +7,27 @@
 	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700italic' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="q42-favicon.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="q42-favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="q42-favicon.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="q42-favicon.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="q42-favicon.png" />
+
+	<link rel="manifest" href="/manifest.json">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#84bc2d">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+	<meta name="theme-color" content="#84bc2d">
 	<script src="q42.js"></script>
 	<script src="page.js"></script>
 </head>
@@ -44,14 +65,14 @@
 	<section id="getit">
 		<h1>How to use this logo</h1>
 		<ol>
-			<li>Add <span class='code'>&lt;script src="http://logo.q42.nl/q42.js"&gt;&lt;/script&gt</span></li>
-			<li>Place a logo using <span class='code'>&lt;q42-logo&gt;</span>. Use CSS to style &amp; position.</li>
+			<li>Add <span class='code'>&lt;script src="http://logo.q42.nl/logo.js"&gt;&lt;/script&gt</span></li>
+			<li>Place a logo using <span class='code'>&lt;q42logo&gt;</span>. Use CSS to style &amp; position.</li>
 		</ol>
 
-		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42-logo&gt;</span>:</p>
+		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42logo&gt;</span>:</p>
 		<ul>
-			<li><span class='code'>renderer="svg|canvas|webgl"</span>, with svg as default</li>
-			<li><span class='code'>theme="green|black|white"</span>, with green as default</li>
+			<li><span class='code'>data-type="svg|canvas|webgl"</span>, with canvas as default</li>
+			<li><span class='code'>data-theme="green|black|white"</span>, with green as default</li>
 		</ul>
 
 		<h1>The old&ndash;fashioned way</h1>
