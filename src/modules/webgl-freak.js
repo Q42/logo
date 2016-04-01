@@ -1,34 +1,27 @@
-Q42Logo.WebGLFreak = function(logo){
+Q42Logo['webgl-freak'] = function(logo){
 	this.logo = logo;
-
-	this.aspect = 500/333.2;
-	this.ratio = window.devicePixelRatio || 1;
-
-	this.element = document.createElement('canvas');
-	this.element.className = 'fill';
-	this.gl = this.element.getContext('webgl');
-
-	this.af = null;
-	this.render = this.render.bind(this);
-	this.draw = this.draw.bind(this);
-
-	this.mainColor = new Float32Array(
-		logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
-	);
 };
 
-Q42Logo.WebGLFreak.prototype = Object.create(Q42Logo.WebGL.prototype);
-
-Q42Logo.WebGLFreak.prototype.vertexShader = [
+var proto = Q42Logo['webgl-freak'].prototype = Object.create(Q42Logo.WebGL.prototype);
+proto.vertexShader = [
 	"attribute vec2 pos;",
 	"uniform float time;",
+	"uniform vec2 mousePos;",
+	"varying vec2 mousePosF;",
 	"void main()",
 	"{",
-			"gl_Position = vec4(pos.x*sin((pos.y*time)/200.),pos.y*cos(pos.x*time/1000.),pos.y*cos(time/2000.),1.0);",
+		"mousePosF = mousePos;",
+		"gl_Position = vec4(pos.x*mousePos.x+pos.x*sin((pos.y*time)/200.),mousePos.y*pos.y+pos.y*cos(pos.x*time/1000.),pos.y*cos(time/2000.),1.0);",
 	"}"
-].join("\n"),
+].join("\n");
 
-Q42Logo.WebGLFreak.prototype.constructor = Q42Logo.WebGLFreak;
-
-
-Q42Logo['webgl-freak'] = Q42Logo.WebGLFreak;
+proto.fragmentShader = [
+	"precision mediump float;",
+	"uniform vec3 mainCol;",
+	"varying vec2 mousePosF;",
+	"void main()",
+	"{",
+		"float mouseDist = length(mousePosF);",
+		"gl_FragColor = vec4(mainCol.r + mouseDist * 1., mainCol.g, mainCol.b, 1.0);",
+	"}"
+].join("\n");

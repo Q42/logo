@@ -1,26 +1,12 @@
 Q42Logo.WebGL = function(logo){
 	this.logo = logo;
-
-	this.aspect = 500/333.2;
-	this.ratio = window.devicePixelRatio || 1;
-
-	this.element = document.createElement('canvas');
-	this.element.className = 'fill';
-	this.gl = this.element.getContext('webgl');
-
-	this.af = null;
-	this.render = this.render.bind(this);
-	this.draw = this.draw.bind(this);
-
-	this.mainColor = new Float32Array(
-		logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
-	);
 };
 
 Q42Logo.WebGL.prototype = {
 	vertexShader: [
 		"attribute vec2 pos;",
 		"uniform float time;",
+		"uniform vec2 mousePos;",
 		"void main()",
 		"{",
 				"gl_Position = vec4(pos.x,pos.y,0.0,1.0);",
@@ -37,15 +23,40 @@ Q42Logo.WebGL.prototype = {
 	].join("\n"),
 
 	init: function(){
+		this.element = document.createElement('canvas');
+		this.element.className = 'fill';
+		this.gl = this.element.getContext('webgl');
+
+		this.uniforms = {};
+		this.mousePos = [0,0];
+
+		this.mainColor = new Float32Array(
+			this.logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
+		);
+
+		this.af = null;
+
+		this.render = this.render.bind(this);
+		this.draw = this.draw.bind(this);
+		this.mousemove = this.mousemove.bind(this);
+		console.log('wut',this);
 		this.setupGL();
 		this.logo.element.appendChild(this.element);
+		this.logo.element.addEventListener('mousemove', this.mousemove);
+		this.logo.element.addEventListener('touchmove', this.mousemove);
 		this.render();
 	},
 
 	setSize: function(){
-		this.element.width = this.logo.element.clientWidth * this.ratio;
-		this.element.height = this.logo.element.clientHeight * this.ratio;
+		this.element.width = this.logo.element.clientWidth * this.logo.ratio;
+		this.element.height = this.logo.element.clientHeight * this.logo.ratio;
 		this.render();
+	},
+
+	mousemove: function(e){
+		e = e.touches && e.touches[0] || e;
+		this.mousePos[0] = (e.offsetX - this.logo.element.clientWidth/2) / this.logo.element.clientWidth * 2;
+		this.mousePos[1] = (this.logo.element.clientHeight/2 - e.offsetY) / this.logo.element.clientHeight * 2;
 	},
 
 	// GL part
@@ -56,6 +67,12 @@ Q42Logo.WebGL.prototype = {
 		this.getShader(this.program, gl.FRAGMENT_SHADER, this.fragmentShader);
 		gl.linkProgram(this.program);
 
+		// uniforms
+		this.uniforms.mainCol = gl.getUniformLocation(this.program, 'mainCol');
+		this.uniforms.time = gl.getUniformLocation(this.program, 'time');
+		this.uniforms.mousePos = gl.getUniformLocation(this.program, 'mousePos');
+
+		// vertex buffer
 		this.triangleBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.triangleBuffer);
 		gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW);
@@ -85,7 +102,7 @@ Q42Logo.WebGL.prototype = {
 		var gl = this.gl;
 		var min = Math.min(this.element.width, this.element.height);
 
-		if(this.element.height / this.element.width > 1) min*=this.aspect;
+		if(this.element.height / this.element.width > 1) min*=this.logo.aspect;
 		if(min > this.element.height) min = this.element.height;
 
 		gl.viewport(
@@ -96,12 +113,10 @@ Q42Logo.WebGL.prototype = {
 
 		gl.useProgram(this.program);
 
-		// send color
-		var unif = gl.getUniformLocation(this.program, 'mainCol');
-		gl.uniform3f(unif, this.mainColor[0], this.mainColor[1], this.mainColor[2]);
-
-		// send time
-		gl.uniform1f(gl.getUniformLocation(this.program, 'time'), performance.now());
+		// send uniforms
+		gl.uniform3f(this.uniforms.mainCol, this.mainColor[0], this.mainColor[1], this.mainColor[2]);
+		gl.uniform1f(this.uniforms.time, performance.now());
+		gl.uniform2f(this.uniforms.mousePos, this.mousePos[0], this.mousePos[1]);
 
 		// send vectors
 		var attr = gl.getAttribLocation(this.program, 'pos');
