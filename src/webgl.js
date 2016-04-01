@@ -8,6 +8,8 @@ Q42Logo.WebGL = function(logo){
 	this.element.className = 'fill';
 	this.gl = this.element.getContext('webgl');
 
+	this.af = null;
+
 	this.mainColor = new Float32Array(
 		logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
 	);
@@ -16,6 +18,7 @@ Q42Logo.WebGL = function(logo){
 Q42Logo.WebGL.prototype = {
 	vertexShader: [
 		"attribute vec2 pos;",
+		"uniform float time;",
 		"void main()",
 		"{",
 				"gl_Position = vec4(pos.x,pos.y,0.0,1.0);",
@@ -32,14 +35,17 @@ Q42Logo.WebGL.prototype = {
 	].join("\n"),
 
 	init: function(){
+		this.render = this.render.bind(this);
+		this.draw = this.draw.bind(this);
 		this.setupGL();
 		this.logo.element.appendChild(this.element);
+		this.render();
 	},
 
 	setSize: function(){
 		this.element.width = this.logo.element.clientWidth * this.ratio;
 		this.element.height = this.logo.element.clientHeight * this.ratio;
-		this.draw();
+		this.render();
 	},
 
 	// GL part
@@ -69,6 +75,12 @@ Q42Logo.WebGL.prototype = {
 		gl.deleteShader(shader);
 	},
 
+	render: function(){
+		cancelAnimationFrame(this.af);
+		this.af = requestAnimationFrame(this.render);
+		this.draw();
+	},
+
 	draw: function(){
 		var gl = this.gl;
 		var min = Math.min(this.element.width, this.element.height);
@@ -87,6 +99,9 @@ Q42Logo.WebGL.prototype = {
 		// send color
 		var unif = gl.getUniformLocation(this.program, 'mainCol');
 		gl.uniform3f(unif, this.mainColor[0], this.mainColor[1], this.mainColor[2]);
+
+		// send time
+		gl.uniform1f(gl.getUniformLocation(this.program, 'time'), performance.now());
 
 		// send vectors
 		var attr = gl.getAttribLocation(this.program, 'pos');

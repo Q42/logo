@@ -1,5 +1,5 @@
 #!/bin/sh
-target="logo.js"
+target="q42.js"
 
 echo "(function(window,document){" > $target.full
 
