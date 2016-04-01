@@ -39,7 +39,6 @@ Q42Logo.WebGL.prototype = {
 		this.render = this.render.bind(this);
 		this.draw = this.draw.bind(this);
 		this.mousemove = this.mousemove.bind(this);
-		console.log('wut',this);
 		this.setupGL();
 		this.logo.element.appendChild(this.element);
 		this.logo.element.addEventListener('mousemove', this.mousemove);
@@ -55,8 +54,9 @@ Q42Logo.WebGL.prototype = {
 
 	mousemove: function(e){
 		e = e.touches && e.touches[0] || e;
-		this.mousePos[0] = (e.offsetX - this.logo.element.clientWidth/2) / this.logo.element.clientWidth * 2;
-		this.mousePos[1] = (this.logo.element.clientHeight/2 - e.offsetY) / this.logo.element.clientHeight * 2;
+		var rect = e.target.getBoundingClientRect();
+		this.mousePos[0] = ((e.pageX - rect.left) - this.logo.element.clientWidth/2) / this.logo.element.clientWidth * 2;
+		this.mousePos[1] = (this.logo.element.clientHeight/2 - (e.pageY - rect.top)) / this.logo.element.clientHeight * 2;
 	},
 
 	// GL part
