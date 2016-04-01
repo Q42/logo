@@ -8,10 +8,10 @@ do
 	cat ./src/$file.js >> $target.full
 done
 
-# Specific non-default modules, pass their basenames as arguments
-for file in $@
+# Auto-include all modules
+for file in ./src/modules/*.js
 do
-	cat ./src/modules/$file.js >> $target.full
+	cat $file >> $target.full
 done
 
 
