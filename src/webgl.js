@@ -9,8 +9,6 @@ Q42Logo.WebGL = function(logo){
 	this.gl = this.element.getContext('webgl');
 
 	this.af = null;
-	this.render = this.render.bind(this);
-	this.draw = this.draw.bind(this);
 
 	this.mainColor = new Float32Array(
 		logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
@@ -37,6 +35,8 @@ Q42Logo.WebGL.prototype = {
 	].join("\n"),
 
 	init: function(){
+		this.render = this.render.bind(this);
+		this.draw = this.draw.bind(this);
 		this.setupGL();
 		this.logo.element.appendChild(this.element);
 		this.render();

@@ -2,15 +2,15 @@
 function Q42Logo(element){
 	this.element = element;
 
-	this.theme = element['dataset']['theme'] || 'green';
+	this.theme = element.getAttribute('theme') || 'green';
 	this.colors = {
 		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
 		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
 	};
 
-	if(!element['dataset']['renderType']) element['dataset']['renderType'] = 'svg';
+	if(!element.getAttribute('renderer')) element.setAttribute('renderer', 'svg');
 
-	this.rendererName = element['dataset']['renderType'];
+	this.rendererName = element.getAttribute('renderer');
 	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['svg'](this);
 
 	// prototype bindings to instance
