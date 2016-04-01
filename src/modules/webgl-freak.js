@@ -42,7 +42,6 @@ proto.fragmentShader = [
 ].join("\n");
 
 proto.initModule = function(){
-	console.log('imod!');
 	this.logo.element.addEventListener('mouseenter', this.enter.bind(this));
 	this.logo.element.addEventListener('mouseleave', this.leave.bind(this));
 };
