@@ -8,14 +8,7 @@ function Q42Logo(element){
 		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
 	};
 
-	if(!element.getAttribute('renderer')) element.setAttribute('renderer', 'svg');
-
-	this.rendererName = element.getAttribute('renderer');
-	this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['svg'](this);
-
-	// prototype bindings to instance
-	this.setSize = this.setSize.bind(this);
-	this.setSizeDeferred = this.setSizeDeferred.bind(this);
+	this.preload();
 
 	// internals
 	this._setSizeAf = null;
@@ -29,8 +22,25 @@ Q42Logo.prototype = {
 	height: 100/3*2 * 500/333.2,
 	ratio: window.devicePixelRatio || 1,
 
+	preload: function(){
+		if(!this.element.getAttribute('renderer')) this.element.setAttribute('renderer', 'svg');
+
+		this.rendererName = this.element.getAttribute('renderer');
+		this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['svg'](this);
+
+		// prototype bindings to instance
+		this.setSize = this.setSize.bind(this);
+		this.setSizeDeferred = this.setSizeDeferred.bind(this);
+	},
+
 	init: function(){
 		this.renderer.init && this.renderer.init();
+		if(this.renderer.error) {
+			console.warn('Renderer [' + this.rendererName + '] gave error, defaulting to SVG.');
+			this.element.removeAttribute('renderer');
+			this.preload();
+			this.init();
+		}
 
 		addEventListener('resize', this.setSize);
 		this.setSize();

@@ -51,6 +51,9 @@ proto.initModule = function(){
 
 proto.enter = function(e){
 	this.started = performance.now();
+	this.leaving = false;
+	this.animating = true;
+	this.render();
 };
 proto.leave = function(e){
 	this.started = performance.now();
@@ -60,6 +63,7 @@ proto.left = function(e){
 	this.started = 0;
 	this.uniformValues['amp'][0] = 0;
 	this.leaving = false;
+	this.animating = false;
 };
 proto.updateValues = function(){
 	if(!this.started) return;

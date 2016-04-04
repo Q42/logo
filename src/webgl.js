@@ -33,7 +33,11 @@ Q42Logo.WebGL.prototype = {
 	init: function(){
 		this.element = document.createElement('canvas');
 		this.element.className = 'fill';
-		this.gl = this.element.getContext('webgl');
+		this.gl = this.element.getContext('webgl') || this.element.getContext('experimental-webgl');
+		this.error = !this.gl;
+		if(this.error) return;
+
+		this.animating = false;
 
 		this['uniformValues'] = this.uniformValues = {};
 		this.uniformRefs = {};
@@ -60,6 +64,7 @@ Q42Logo.WebGL.prototype = {
 	},
 
 	setSize: function(){
+		if(this.error) return;
 		this.element.width = this.logo.element.clientWidth * this.logo.ratio;
 		this.element.height = this.logo.element.clientHeight * this.logo.ratio;
 		this.render();
@@ -116,7 +121,8 @@ Q42Logo.WebGL.prototype = {
 
 	render: function(){
 		cancelAnimationFrame(this.af);
-		this.af = requestAnimationFrame(this.render);
+		if(this.animating)
+			this.af = requestAnimationFrame(this.render);
 		this.draw();
 	},
 
