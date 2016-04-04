@@ -1,6 +1,7 @@
 Q42Logo['webgl-freak'] = function(logo){
 	this.logo = logo;
 	this.started = 0;
+	this.leaving = false;
 };
 
 var proto = Q42Logo['webgl-freak'].prototype = Object.create(Q42Logo.WebGL.prototype);
@@ -52,10 +53,17 @@ proto.enter = function(e){
 	this.started = performance.now();
 };
 proto.leave = function(e){
+	this.started = performance.now();
+	this.leaving = true;
+},
+proto.left = function(e){
 	this.started = 0;
 	this.uniformValues['amp'][0] = 0;
+	this.leaving = false;
 };
 proto.updateValues = function(){
 	if(!this.started) return;
-	this.uniformValues['amp'][0] = Math.min(1000,(performance.now()-this.started)/3)/1000;
+	this.uniformValues['amp'][0] = Beziers.easeInOutQuint(Math.min(1000,(performance.now()-this.started)*(this.leaving && 4 || 1))/1000);
+	if(this.leaving && !(this.uniformValues['amp'][0] = 1 - this.uniformValues['amp'][0]))
+		this.left();
 };
