@@ -1,14 +1,13 @@
 // Render logo as canvas2d-element
 Q42Logo.Canvas = function(logo){
 	this.logo = logo;
-
-	this.element = document.createElement('canvas');
-	this.element.className = 'fill';
-	this.ctx = this.element.getContext('2d');
 };
 
 Q42Logo.Canvas.prototype = {
 	init: function(){
+		this.element = document.createElement('canvas');
+		this.element.className = 'fill';
+		this.ctx = this.element.getContext('2d');
 		this.logo.element.appendChild(this.element);
 	},
 
