@@ -37,6 +37,8 @@ Q42Logo.WebGL.prototype = {
 		this.error = !this.gl;
 		if(this.error) return;
 
+		this.animating = false;
+
 		this['uniformValues'] = this.uniformValues = {};
 		this.uniformRefs = {};
 		this.uniformArgs = {};
@@ -119,7 +121,8 @@ Q42Logo.WebGL.prototype = {
 
 	render: function(){
 		cancelAnimationFrame(this.af);
-		this.af = requestAnimationFrame(this.render);
+		if(this.animating)
+			this.af = requestAnimationFrame(this.render);
 		this.draw();
 	},
 
