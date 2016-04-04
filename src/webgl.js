@@ -44,9 +44,17 @@ Q42Logo.WebGL.prototype = {
 		this.uniformRefs = {};
 		this.uniformArgs = {};
 
-		this.uniformValues['mainCol'] = new Float32Array(
-			this.logo.theme == 'green' && [132/255, 187/255, 37/255] || [1,1,1]
-		);
+		var color = [0,0,0];
+		switch(this.logo.theme) {
+			case 'green':
+				color = [132/255, 187/255, 37/255];
+				break;
+			case 'white':
+				color = [1,1,1];
+				break;
+		}
+
+		this.uniformValues['mainCol'] = new Float32Array(color);
 
 		this.af = null;
 
