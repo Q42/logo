@@ -36,7 +36,7 @@ Q42Logo.prototype = {
 	init: function(){
 		this.renderer.init && this.renderer.init();
 		if(this.renderer.error) {
-			console.log('not comp!');
+			console.warn('Renderer [' + this.rendererName + '] gave error, defaulting to SVG.');
 			this.element.removeAttribute('renderer');
 			this.preload();
 			this.init();
