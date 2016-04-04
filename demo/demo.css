@@ -3,27 +3,27 @@ body {
 	margin: 0;
 	padding: 0;
 }
-q42-logo {
-	width: 40%;
+q42 {
+	width: 25%;
 	height: 29vh;
 	margin: 1vh;
 	padding: 1vh;
 	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
 }
-q42-logo[theme="white"] {
+q42[theme="white"] {
 	background: #444;
 }
 
-q42-logo[renderer="svg"] {
+q42[renderer="svg"] {
 	position: relative;
 	-webkit-perspective: 500px;
 	perspective: 500px;
 }
-q42-logo[renderer="svg"] svg {
+q42[renderer="svg"] svg {
 	-webkit-transition: -webkit-transform 1s ease;
 	transition: transform 1s ease;
 }
-q42-logo[renderer="svg"]:hover svg {
+q42[renderer="svg"]:hover svg {
 	-webkit-transform: rotate3d(0,1,0,900deg);
 	transform: rotate3d(0,1,0,900deg);
 }

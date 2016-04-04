@@ -10,8 +10,9 @@
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<link rel="stylesheet" type="text/css" href="demo.css" />
-		<script src="../q42.js"></script>
 		<!--
+		<script src="../q42.js"></script>
+	-->
 		<script src="../src/logo.js"></script>
 		<script src="../src/beziers.js"></script>
 		<script src="../src/embeds.js"></script>
@@ -20,14 +21,16 @@
 		<script src="../src/webgl.js"></script>
 		<script src="../src/modules/canvas-demo.js"></script>
 		<script src="../src/modules/webgl-freak.js"></script>
-	-->
 	</head>
 	<body>
-		<q42-logo></q42-logo>
-		<q42-logo theme="white"></q42-logo>
-		<q42-logo renderer="canvas-demo" theme="white"></q42-logo>
-		<q42-logo renderer="canvas-demo"></q42-logo>
-		<q42-logo renderer="webgl-freak"></q42-logo>
-		<q42-logo renderer="webgl-freak" theme="white"></q42-logo>
+		<q42></q42>
+		<q42 theme="white"></q42>
+		<q42 theme="black"></q42>
+		<q42 renderer="canvas-demo" theme="black"></q42>
+		<q42 renderer="canvas-demo"></q42>
+		<q42 renderer="canvas-demo" theme="white"></q42>
+		<q42 renderer="webgl-freak" theme="white"></q42>
+		<q42 renderer="webgl-freak" theme="black"></q42>
+		<q42 renderer="webgl-freak"></q42>
 	</body>
 </html>

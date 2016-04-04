@@ -7,7 +7,7 @@ Q42Logo.Embeds = function(){
 };
 
 Q42Logo.Embeds.prototype = {
-	querySelector: 'q42-logo',
+	querySelector: 'q42',
 
 	init: function(){
 		this.elements = document.querySelectorAll(this.querySelector);
@@ -28,7 +28,7 @@ addEventListener('DOMContentLoaded',function(){
 	var embedder = new Q42Logo.Embeds;
 	addEventListener('DOMNodeInserted',function(e){
 		if(!e.target) return;
-		if(e.target.tagName == 'Q42-LOGO') {
+		if(e.target.tagName == 'Q42') {
 			embedder.print(e.target);
 		}
 		else if(e.target.querySelectorAll) {

@@ -8,6 +8,16 @@ function Q42Logo(element){
 		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
 	};
 
+	switch(this.theme){
+		case 'green':
+			this.colors.background = '#84bc2d';
+			this.colors.foreground = '#ffffff';
+			break;
+		case 'black':
+			this.colors.background = '#000000';
+			break;
+	}
+
 	this.preload();
 
 	// internals
@@ -62,5 +72,5 @@ window['Q42Logo'] = Q42Logo;
 
 // Default <q42-logo> css
 var style = document.createElement('style');
-style.textContent = 'q42-logo { display: inline-block; } q42-logo > .fill { width: 100%; height: 100%; pointer-events: none; }';
+style.textContent = 'q42 { display: inline-block; } q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);
