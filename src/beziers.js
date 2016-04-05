@@ -42,6 +42,7 @@ var Beziers = window['Beziers'] = {
   easeInOutQuint: Bezier(0.860, 0.000, 0.070, 1.000)
 };
 
+Beziers['easeInOutQuint'] = Beziers.easeInOutQuint;
 Beziers['easeInOut'] = Beziers.easeInOut;
 Beziers['easeIn'] = Beziers.easeIn;
 Beziers['easeOut'] = Beziers.easeOut;

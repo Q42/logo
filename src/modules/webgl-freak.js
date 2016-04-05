@@ -1,7 +1,7 @@
 Q42Logo['webgl-freak'] = function(logo){
 	this.logo = logo;
 	this.started = 0;
-	this.leaving = false;
+	this.leaving = 0;
 };
 
 var proto = Q42Logo['webgl-freak'].prototype = Object.create(Q42Logo.WebGL.prototype);
@@ -51,23 +51,24 @@ proto.initModule = function(){
 
 proto.enter = function(e){
 	this.started = performance.now();
-	this.leaving = false;
+	this.leaving = 0;
 	this.animating = true;
 	this.render();
 };
 proto.leave = function(e){
 	this.started = performance.now();
-	this.leaving = true;
+	this.leaving = this.uniformValues['amp'][0];
 },
 proto.left = function(e){
 	this.started = 0;
 	this.uniformValues['amp'][0] = 0;
-	this.leaving = false;
+	this.leaving = 0;
 	this.animating = false;
 };
 proto.updateValues = function(){
 	if(!this.started) return;
-	this.uniformValues['amp'][0] = Beziers.easeInOutQuint(Math.min(1000,(performance.now()-this.started)*(this.leaving && 4 || 1))/1000);
-	if(this.leaving && !(this.uniformValues['amp'][0] = 1 - this.uniformValues['amp'][0]))
+	this.uniformValues['time'][0] = performance.now() - this.started;
+	this.uniformValues['amp'][0] = Beziers[(this.leaving && 'easeOut' || 'easeInOutQuint')](Math.min(1000,(performance.now()-this.started)*(this.leaving && 4 || 2))/1000);
+	if(this.leaving && (this.uniformValues['amp'][0] = this.leaving - this.uniformValues['amp'][0]) <= 0)
 		this.left();
 };

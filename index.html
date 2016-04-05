@@ -32,7 +32,7 @@
 </head>
 
 <body>
-	<q42-logo id="logo" renderer="webgl-freak"></q42-logo>
+	<q42 id="logo" renderer="webgl-freak"></q42>
 
 	<section id="manifesto">
 		<p>
@@ -58,24 +58,24 @@
 			for you to recreate for whatever purpose. The Q42 Green is
 			<span class="code" title="click to copy to clipboard">#84bc2d</span> or PMS 376.
 		</p>
-		<img src="Factsheet.svg" class="factsheet" title="Factsheet"></img>
+		<img src="Factsheet.svg" class="factsheet" title="Factsheet" />
 	</section>
 
 	<section id="getit">
 		<h1>How to use this logo</h1>
 		<ol>
-			<li>Add <span class='code'>&lt;script src="http://logo.q42.nl/logo.js"&gt;&lt;/script&gt</span></li>
-			<li>Place a logo using <span class='code'>&lt;q42-logo&gt;</span>. Use CSS to style &amp; position.</li>
+			<li>Add <span class='code'>&lt;script src="http://logo.q42.nl/q42.js"&gt;&lt;/script&gt</span></li>
+			<li>Place a logo using <span class='code'>&lt;q42&gt;&lt;/q42&gt;</span>. Use CSS to style &amp; position.</li>
 		</ol>
 
-		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42-logo&gt;</span>:</p>
+		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42&gt;</span>:</p>
 		<ul>
-			<li><span class='code'>data-type="svg|canvas|webgl"</span>, with canvas as default</li>
-			<li><span class='code'>data-theme="green|black|white"</span>, with green as default</li>
+			<li><span class='code'>renderer="svg|canvas|webgl"</span>, with svg as default</li>
+			<li><span class='code'>theme="green|black|white"</span>, with green as default</li>
 		</ul>
 
-		<h1>The old&ndash;fashioned way</h1>
-		<p>Use the logo as a vector or image file (SVG or PNG). This is not recommended because it is boring.</p>
+		<h1>The old-fashioned way</h1>
+		<p>You can get the logo as a vector or image file (SVG or PNG). This is not recommended because it is boring.</p>
 
 		<div>
 			<span class="lhead">Color way</span>
@@ -101,16 +101,16 @@
 
 		<div>
 			<span class="lhead">Include</span>
-			<span class='code'>&lt;img src="http://logo.q42.nl/<span class="imgfilename"></span>"&gt;&lt;/img&gt;</span>
+			<span class='code'>&lt;img src="http://logo.q42.nl/<span class="imgfilename"></span>" /&gt;</span>
 		</div>
 
 		<div>
 			<span class="lhead">or download</span>
-			<a id="imgdownload" href="#"><span class="imgfilename"></span></a>
+			<a id="imgdownload" href="#" download><span class="imgfilename"></span></a>
 		</div>
 
 
-		<h1>Even more old&ndash;fashioned</h1>
+		<h1>Even more old-fashioned</h1>
 		<p>Rumors exist that outside of the modern world, some still use paper to get stuff done.
 			We don't know why or what for. But if someone asks for something called a 'vector file',
 			just give them <a href="q42-logo.eps">this EPS file</a>. </p>
@@ -123,12 +123,11 @@
 			<a href="q42-logo.stl" download>STL</a>, or <a href="q42-logo.svg">SVG</a> file into your modeler.</li>
 		</ul>
 
-		<h1>Something else altogether</h1>
-		<p>Some awesome alternative logos:</p>
+		<h1>Go wild</h1>
+		<p>Some awesome alternative logos for use on swag:</p>
 		<ul>
-			<li><a href="#">Q42 - NERD</a></li>
-			<li><a href="#">Q42 - Rock Guitar Wings</a></li>
-			<li><a href="#">Q42 - A Hoppy Place</a></li>
+			<li><a href="q42-logo-nerd.png">Q42 Nerd</a></li>
+			<li><a href="q42-logo-guitar.png">Q42 Rock Guitar Wings</a></li>
 		</ul>
 
 	</section>
@@ -139,10 +138,10 @@
 			<p>For all your awesome ideas, like doodles on specific days, attract animations, hidden minigames, whatever:</p>
 
 			<ol>
-				<li>Clone from <a href="https://github.com/Q42/logo">Github</a>.</li>
-				<li>Create a plugin to add behavior, or just hack away.</li>
-				<li>Make a pull request. </li>
-				<li>Note that any changes will be visible on all interactive Q42 logos everywhere.</li>
+				<li>Clone from <a href="https://github.com/Q42/logo">Github</a></li>
+				<li>Create a module to add behavior (based on either canvas or WebGL)</li>
+				<li>Make a pull request</li>
+				<li>Voila! Logo awesome +1</li>
 			</ol>
 		</section>
 	</div>

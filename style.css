@@ -1,16 +1,29 @@
 /* common */
 
+@font-face {
+   font-family: 'Proxima Nova';
+   font-weight: normal;
+   src: url('fonts/proxima_nova_regular.woff');
+}
+
+@font-face {
+   font-family: 'Proxima Nova';
+   font-weight: bold;
+   src: url('fonts/proxima_nova_extrabold.woff') format('woff');
+}
+
 .q-green {
   color: #84bc2d;
 }
 
 body, select, input {
-  font: 17px/27px 'Work Sans', sans-serif;
+  font: 20px/32px 'Proxima Nova', sans-serif;
   color: #333;
 }
 
 h1, h2, h3 {
-  font: bold italic 50px 'Playfair Display', sans-serif;
+  font: bold 20px 'Proxima Nova', sans-serif;
+  text-transform: uppercase;
   color: #333;
 }
 
@@ -21,11 +34,10 @@ body {
 /* page elements and styles */
 
 #logo {
-  margin: 100px auto;
+  margin: 50px auto;
   width: 30vw;
-  height: 30vh;
+  height: 40vh;
   display: block;
-  padding: 20px;
 }
 
 section {
@@ -35,7 +47,7 @@ section {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 36px;
   margin: 2em 0 0 0;
 }
 
@@ -61,7 +73,7 @@ a {
 }
 
 #factsheet {
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
   background: #000082;
@@ -122,6 +134,21 @@ a {
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   section {
-    width: 90vw;
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em 0;
   }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  #factsheet h1,
+  #factsheet p {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em 0;
+    color: white;
+  }
+
 }
