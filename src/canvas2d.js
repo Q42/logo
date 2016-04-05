@@ -1,14 +1,13 @@
 // Render logo as canvas2d-element
 Q42Logo.Canvas = function(logo){
 	this.logo = logo;
-
-	this.element = document.createElement('canvas');
-	this.element.className = 'fill';
-	this.ctx = this.element.getContext('2d');
 };
 
 Q42Logo.Canvas.prototype = {
 	init: function(){
+		this.element = document.createElement('canvas');
+		this.element.className = 'fill';
+		this.ctx = this.element.getContext('2d');
 		this.logo.element.appendChild(this.element);
 	},
 
@@ -19,11 +18,12 @@ Q42Logo.Canvas.prototype = {
 		var yo = canvas.height / 2;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.translate(xo, yo);
-		this.drawLogo();
+		this.drawShape();
+		this.drawText();
 		ctx.translate(-xo, -yo);
 	},
 
-	drawLogo: function(){
+	drawShape: function(){
 		var ctx = this.ctx;
 		var scale = 1/Math.max(this.logo.width/this.element.width, this.logo.height/this.element.height);
 
@@ -39,7 +39,10 @@ Q42Logo.Canvas.prototype = {
 		ctx.closePath();
 		ctx.fillStyle = this.logo.colors.background;
 		ctx.fill();
+	},
 
+	drawText: function(){
+		var ctx = this.ctx;
 
 		// q42/Compound Path
 		ctx.beginPath();
