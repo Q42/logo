@@ -17,7 +17,7 @@
 }
 
 body, select, input {
-  font: 20px/32px 'Work Sans', sans-serif;
+  font: 20px/32px 'Proxima Nova', sans-serif;
   color: #333;
 }
 
@@ -134,6 +134,21 @@ a {
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   section {
-    width: 90vw;
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em 0;
   }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  #factsheet h1,
+  #factsheet p {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1em 0;
+    color: white;
+  }
+
 }
