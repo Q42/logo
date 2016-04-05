@@ -10,23 +10,26 @@ function romanize (num) {
   while (i--)
     roman = (key[+digits.pop() + (i * 10)] || "") + roman;
   return Array(+digits.join("") + 1).join("M") + roman;
-}
+};
 
-function updateImageDownload() {
-  var fn = "q42-logo" + $("#colorway").val() + $("#format").val();
-  $(".imgfilename").text(fn);
-  $("#imgdownload").attr('href', fn);
-}
 
-$(document).ready(function(){
-  $(".year").text(romanize(new Date().getYear()));
-  updateImageDownload();
-});
+addEventListener('DOMContentLoaded', function(){
+  var _years = document.querySelectorAll('.year');
+  for(var i=0;i<_years.length;i++)
+    _years[i].textContent = romanize(new Date().getYear());
 
-$(document).on('change', '#colorway', function() {
-  updateImageDownload();
-});
+  var _colorway = document.getElementById('colorway');
+  _colorway.onchange = updateImageDownload;
+  var _format = document.getElementById('format');
+  _format.onchange = updateImageDownload;
+  var _img = document.querySelector('.imgfilename');
+  var _imgDl = document.getElementById('imgdownload');
 
-$(document).on('change', '#format', function() {
+  function updateImageDownload() {
+    var fn = "q42-logo" + _colorway.value + _format.value;
+    _img.textContent = fn;
+    _imgDl.href = fn;
+  };
+
   updateImageDownload();
 });
