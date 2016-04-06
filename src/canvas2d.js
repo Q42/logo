@@ -9,6 +9,7 @@ Q42Logo.Canvas.prototype = {
 		this.element.className = 'fill';
 		this.ctx = this.element.getContext('2d');
 		this.logo.element.appendChild(this.element);
+		if(this.initModule instanceof Function) this.initModule();
 	},
 
 	draw: function(){
@@ -39,10 +40,16 @@ Q42Logo.Canvas.prototype = {
 		ctx.closePath();
 		ctx.fillStyle = this.logo.colors.background;
 		ctx.fill();
+		ctx.translate(33.3,33.3*this.logo.aspect);
+		ctx.scale(1/scale,1/scale);
 	},
 
 	drawText: function(){
 		var ctx = this.ctx;
+		var scale = 1/Math.max(this.logo.width/this.element.width, this.logo.height/this.element.height);
+
+		ctx.scale(scale,scale);
+		ctx.translate(-33.3,-33.3*this.logo.aspect);
 
 		// q42/Compound Path
 		ctx.beginPath();
@@ -68,6 +75,7 @@ Q42Logo.Canvas.prototype = {
 		ctx.bezierCurveTo(17.7, 30.3, 24.7, 37.3, 33.4, 37.3);
 		ctx.bezierCurveTo(37.2, 37.3, 40.8, 35.9, 43.7, 33.4);
 		ctx.lineTo(47.5, 36.3);
+		ctx.translate(0,-2); // dependent on angle
 		ctx.closePath();
 		if(this.logo.colors.foreground == 'transparent')
 			this.ctx.globalCompositeOperation = 'xor'
@@ -118,6 +126,8 @@ Q42Logo.Canvas.prototype = {
 		ctx.lineTo(35.0, 46.8);
 		ctx.closePath();
 		ctx.fill();
+		ctx.translate(33.3,33.3*this.logo.aspect);
+		ctx.scale(1/scale,1/scale);
 	},
 
 	setSize: function(){
