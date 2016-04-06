@@ -10,6 +10,9 @@ var proto = Q42Logo['canvas-demo'].prototype = Object.create(Q42Logo.Canvas.prot
 // This is called once onload, use requestAnimationFrame on mouse hover
 // for animation. Check out webgl.js for a .render() example.
 proto.draw = function(){
+	this.draw = this.draw.bind(this);
+	requestAnimationFrame(this.draw);
+
 	var canvas = this.element;
 	var ctx = this.ctx;
 	var xo = canvas.width / 2;
