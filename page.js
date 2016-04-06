@@ -22,12 +22,13 @@ addEventListener('DOMContentLoaded', function(){
   _colorway.onchange = updateImageDownload;
   var _format = document.getElementById('format');
   _format.onchange = updateImageDownload;
-  var _img = document.querySelector('.imgfilename');
+  var _img = document.querySelectorAll('.imgfilename');
   var _imgDl = document.getElementById('imgdownload');
 
   function updateImageDownload() {
     var fn = "q42-logo" + _colorway.value + _format.value;
-    _img.textContent = fn;
+    for(var i=0;i<_img.length;i++)
+      _img[i].textContent = fn;
     _imgDl.href = fn;
   };
 
