@@ -68,14 +68,21 @@ Q42Logo.WebGL.prototype = {
 		this.logo.element.appendChild(this.element);
 		this.logo.element.addEventListener('mousemove', this.mousemove);
 		this.logo.element.addEventListener('touchmove', this.mousemove);
-
-		this.render();
 	},
 
 	setSize: function(){
 		if(this.error) return;
 		this.element.width = this.logo.element.clientWidth * this.logo.ratio;
 		this.element.height = this.logo.element.clientHeight * this.logo.ratio;
+
+		// Fix for failing iOS
+		var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+		if(iOS) {
+			var style = window.getComputedStyle(this.logo.element, null);
+			this.element.style.width = parseInt(style.getPropertyValue('width')) - 1 + 'px';
+			this.element.style.height = parseInt(style.getPropertyValue('height')) - 1 + 'px';
+		}
+
 		this.render();
 	},
 
@@ -147,11 +154,10 @@ Q42Logo.WebGL.prototype = {
 		// For dynamic uniforms in modules
 		if(this.updateValues instanceof Function) this.updateValues();
 
-		gl.viewport(0, 0, this.element.width,this.element.height);
+		gl.viewport(0, 0, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
 		gl.useProgram(this.program);
 
 		// send uniforms
-		//gl.uniform1f(this.uniformRefs.time, performance.now());
 		gl.uniform2f(this.uniformRefs.ratio, min/this.element.width, min/this.element.height);
 		for(var x in this.uniforms) {
 			if(!this.uniformRefs[x]) continue;
