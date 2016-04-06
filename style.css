@@ -133,6 +133,7 @@ a {
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
   section {
     width: 90%;
     margin: 0 auto;
