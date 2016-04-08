@@ -19,6 +19,9 @@ function Q42Logo(element){
 	}
 
 	element.setAttribute('title', 'Q42');
+	element.setAttribute('role', 'logo');
+	element.setAttribute('aria-role', 'image');
+	element.setAttribute('aria-label', 'Q42 Logo');
 
 	this.preload();
 
