@@ -13,24 +13,23 @@ function romanize (num) {
 };
 
 
-addEventListener('DOMContentLoaded', function(){
-  var _years = document.querySelectorAll('.year');
-  for(var i=0;i<_years.length;i++)
-    _years[i].textContent = romanize(new Date().getYear());
+var _years = document.querySelectorAll('.year');
+for(var i=0;i<_years.length;i++)
+  _years[i].textContent = romanize(new Date().getYear());
 
-  var _colorway = document.getElementById('colorway');
-  _colorway.onchange = updateImageDownload;
-  var _format = document.getElementById('format');
-  _format.onchange = updateImageDownload;
-  var _img = document.querySelectorAll('.imgfilename');
-  var _imgDl = document.getElementById('imgdownload');
+var _colorway = document.getElementById('colorway');
+_colorway.onchange = updateImageDownload;
+var _format = document.getElementById('format');
+_format.onchange = updateImageDownload;
+var _img = document.querySelectorAll('.imgfilename');
+var _imgDl = document.getElementById('imgdownload');
 
-  function updateImageDownload() {
-    var fn = "q42-logo" + _colorway.value + _format.value;
-    for(var i=0;i<_img.length;i++)
-      _img[i].textContent = fn;
-    _imgDl.href = fn;
-  };
+function updateImageDownload() {
+  var fn = "q42-logo" + _colorway.value + _format.value;
+  for(var i=0;i<_img.length;i++)
+    _img[i].textContent = fn;
+  _imgDl.href = fn;
+};
 
-  updateImageDownload();
-});
+updateImageDownload();
+

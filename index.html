@@ -27,8 +27,6 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#84bc2d">
-	<script src="q42.js"></script>
-	<script src="page.js"></script>
 </head>
 
 <body>
@@ -64,8 +62,8 @@
 	<section id="getit">
 		<h1>How to use this logo</h1>
 		<ol>
-			<li>Add <span class='code'>&lt;script src="http://logo.q42.com/q42.js"&gt;&lt;/script&gt</span></li>
 			<li>Place a logo using <span class='code'>&lt;q42&gt;&lt;/q42&gt;</span>. Use CSS to style &amp; position.</li>
+			<li>Add <span class='code'>&lt;script src="http://logo.q42.com/q42.js" async&gt;&lt;/script&gt</span> after the <span class='code'>&lt;q42&gt;&lt;/q42&gt;</span> elements.</li>
 		</ol>
 
 		<p>That's it! Optionally, you can add attributes to <span class='code'>&lt;q42&gt;</span>:</p>
@@ -152,6 +150,8 @@
 		</section>
 	</div>
 
+	<script src="q42.js" async></script>
+	<script src="page.js" async></script>
 </body>
 
 </html>

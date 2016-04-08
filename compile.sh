@@ -3,7 +3,7 @@ target="q42.js"
 
 echo "(function(window,document){" > $target.full
 
-for file in logo beziers embeds svg canvas2d webgl
+for file in logo beziers svg canvas2d webgl embeds
 do
 	cat ./src/$file.js >> $target.full
 done
