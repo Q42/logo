@@ -20,21 +20,24 @@ Q42Logo.Embeds.prototype = {
 		this.instances.push(new Q42Logo(el));
 		el.printed = true;
 	}
-
 };
 
 // dynamic element detector
-addEventListener('DOMContentLoaded',function(){
-	var embedder = new Q42Logo.Embeds;
-	addEventListener('DOMNodeInserted',function(e){
-		if(!e.target) return;
-		if(e.target.tagName == 'Q42') {
-			embedder.print(e.target);
-		}
-		else if(e.target.querySelectorAll) {
-			var els = e.target.querySelectorAll(embedder.querySelector);
-			for(var i=0;i<els.length;i++)
-				embedder.print(els[i]);
-		}
-	});
+var embedder = new Q42Logo.Embeds;
+
+addEventListener('DOMNodeInserted',function(e){
+	if(!e.target) return;
+	if(e.target.tagName == 'Q42') {
+		embedder.print(e.target);
+	}
+	else if(e.target.querySelectorAll) {
+		var els = e.target.querySelectorAll(embedder.querySelector);
+		for(var i=0;i<els.length;i++)
+			embedder.print(els[i]);
+	}
+});
+
+// make an async script possible in <head>
+addEventListener('DOMContentLoaded', function(){
+	embedder.init();
 });
