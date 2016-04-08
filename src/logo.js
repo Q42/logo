@@ -4,8 +4,8 @@ function Q42Logo(element){
 
 	this.theme = element.getAttribute('theme') || 'green';
 	this.colors = {
-		background: this.theme == 'green' && '#84bc2d' || '#ffffff',
-		foreground: this.theme == 'green' && '#ffffff' || 'transparent'
+		background: '#ffffff',
+		foreground: 'transparent'
 	};
 
 	switch(this.theme){
@@ -17,6 +17,8 @@ function Q42Logo(element){
 			this.colors.background = '#000000';
 			break;
 	}
+
+	element.setAttribute('title', 'Q42');
 
 	this.preload();
 
