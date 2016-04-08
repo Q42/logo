@@ -36,3 +36,8 @@ addEventListener('DOMNodeInserted',function(e){
 			embedder.print(els[i]);
 	}
 });
+
+// make an async script possible in <head>
+addEventListener('DOMContentLoaded', function(){
+	embedder.init();
+});
