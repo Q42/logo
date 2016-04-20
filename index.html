@@ -170,7 +170,7 @@
 
 		var _years = document.querySelectorAll('.year');
 		for(var i=0;i<_years.length;i++)
-			_years[i].textContent = romanize(new Date().getYear());
+			_years[i].textContent = romanize(new Date().getFullYear());
 
 		var _colorway = document.getElementById('colorway');
 		_colorway.onchange = updateImageDownload;

@@ -2,6 +2,7 @@ body {
 	text-align: center;
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 q42 {
 	width: 25%;
@@ -26,4 +27,10 @@ q42[renderer="svg"] svg {
 q42[renderer="svg"]:hover svg {
 	-webkit-transform: rotate3d(0,1,0,900deg);
 	transform: rotate3d(0,1,0,900deg);
+}
+
+q42.full {
+	width: 96vw;
+	height: 96vh;
+	box-shadow: none;
 }

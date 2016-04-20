@@ -88,6 +88,7 @@ Q42Logo.WebGL.prototype = {
 	},
 
 	mousemove: function(e){
+		if(!this.uniformValues['mousePos']) return;
 		e = e.touches && e.touches[0] || e;
 		var rect = e.target.getBoundingClientRect();
 		this.uniformValues['mousePos'][0] = ((e.pageX - rect.left) - this.logo.element.clientWidth/2) / this.logo.element.clientWidth * 2;
@@ -103,14 +104,10 @@ Q42Logo.WebGL.prototype = {
 		gl.linkProgram(this.program);
 
 		// uniforms
-		this.uniformRefs.time = gl.getUniformLocation(this.program, 'time');
 		this.uniformRefs.ratio = gl.getUniformLocation(this.program, 'ratio');
 		for(var x in this.uniforms) {
 			this.uniformRefs[x] = gl.getUniformLocation(this.program, x);
-			if(!this.uniformRefs[x]) {
-				console.warn('Uniform [' + x + '] not specified or unused');
-				continue;
-			}
+			if(!this.uniformRefs[x]) continue;
 			if(!this.uniformValues[x])
 				this.uniformValues[x] = new Float32Array(this.uniforms[x]);
 			this.uniformArgs[x] = [this.uniformRefs].concat(new Array(this.uniforms[x]));
@@ -154,7 +151,8 @@ Q42Logo.WebGL.prototype = {
 		if(this.element.height / this.element.width > 1) min*=this.logo.aspect;
 		if(min > this.element.height) min = this.element.height;
 
-		this.uniformValues['time'][0] = performance.now();
+		if(this.uniformValues['time'])
+			this.uniformValues['time'][0] = performance.now();
 
 		// For dynamic uniforms in modules
 		if(this.updateValues instanceof Function) this.updateValues();
