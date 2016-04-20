@@ -38,14 +38,18 @@ proto.vertexShader = [
 	"{",
 			// This variable is shared with the fragment shader
 			// The 4th position is used for clipping-- irrelevant here, keep it at 1
-			"position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
+			"position = vec4(pos.x*ratio.x, pos.y*ratio.y, 0.0, 1.0);",
 
 			// Share time with fragment shader
 			"timeVar = time;",
 
 			// Manipulate the x-position of this vertex based on time
-			"position.y += sin(time*.001);",
-      //"position.x += sin(time*.001);",
+      "float bla = abs(sin(time*.005));",
+			"position.y += bla * .5 * (position.y + 1.0);",
+      "position.y *= position.y * -.2;",
+      //"if(position.y == 0.0){",
+      //"position.y += bla * .08;",
+      //"}",
 
 			// gl_Position is the default output variable
 			"gl_Position = position;",
