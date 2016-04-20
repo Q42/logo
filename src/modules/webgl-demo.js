@@ -44,7 +44,8 @@ proto.vertexShader = [
 			"timeVar = time;",
 
 			// Manipulate the x-position of this vertex based on time
-			"position.x *= sin(time*.005);",
+			"position.y += sin(time*.001);",
+      //"position.x += sin(time*.001);",
 
 			// gl_Position is the default output variable
 			"gl_Position = position;",
@@ -69,9 +70,9 @@ proto.fragmentShader = [
 	"void main()",
 	"{",
 			// Play with the colours
-			"float red = mainCol.r * sin(timeVar*.002);",
-			"float green = mainCol.g * sin(timeVar*.01);",
-			"float blue = mainCol.b * sin(timeVar*.04);",
+			"float red = abs(cos(timeVar*.0012));",
+			"float green = abs(cos(timeVar*.0016));",
+			"float blue = abs(cos(timeVar*.0029));",
 
 			// Output is RGBA
 			"gl_FragColor = vec4(red, green, blue, 1.0);",
