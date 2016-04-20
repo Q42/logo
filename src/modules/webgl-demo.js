@@ -18,7 +18,7 @@ proto.vertexShader = [
 	// timestamp in MS
 	"uniform float time;",
 
-	// amp
+	// Effect amplitude
 	"uniform float amp;",
 
 	// Logo width, height ratio for correct rendering
