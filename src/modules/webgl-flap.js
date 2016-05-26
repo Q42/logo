@@ -24,9 +24,9 @@ proto.vertexShader = [
     "float a = amp * 3.1415 * 2.;",
     "float curve = (1. - cos(a)) * .5;",
     "flap = sin(time / 100.) * pow(pos.x, 2.) * pow(amp, .3);",
-    "position = vec3(pos.x * cos(flap), pos.y, 1.0 - curve * (1. - cos(pos.y)) - flap);",
+    "position = vec3(pos.x * cos(flap), pos.y, 1.0 - curve * (1. - cos(pos.y)) - flap * (1. - amp*.5));",
 		"position = vec3(position.x, position.y * cos(a) + position.z * sin(a), position.z * cos(a) - position.y * sin(a));",
-		"position = vec3(position.xy / ((4.0 - position.z) / 3.) * ratio, 0.);",
+		"position = vec3(position.xy / ((2.5 - position.z) / 1.5) * ratio, 0.);",
 		"mousePosF = mousePos;",
 		"ampF = amp;",
 		"timeF = time;",
@@ -77,7 +77,7 @@ proto.left = function(e){
 proto.updateValues = function(){
 	if(!this.started) return;
 	this.uniformValues['time'][0] = performance.now() - this.started;
-	this.uniformValues['amp'][0] = Beziers['easeOut'](Math.min(1000,(performance.now()-this.started)*0.5)/1000);
+	this.uniformValues['amp'][0] = Beziers[this.leaving ? 'easeIn' : 'easeOut'](Math.min(1000,(performance.now()-this.started)*0.5)/1000);
 	if(this.leaving && (this.uniformValues['amp'][0] = this.leaving - this.uniformValues['amp'][0]) <= 0)
 		this.left();
 };
