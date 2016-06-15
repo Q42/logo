@@ -152,7 +152,7 @@ Q42Logo.WebGL.prototype = {
 		if(min > this.element.height) min = this.element.height;
 
 		if(this.uniformValues['time'])
-			this.uniformValues['time'][0] = performance.now();
+			this.uniformValues['time'][0] = 0;
 
 		// For dynamic uniforms in modules
 		if(this.updateValues instanceof Function) this.updateValues();
