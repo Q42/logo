@@ -1,50 +1,41 @@
-Q42Logo['webgl-demo'] = function(logo){
+Q42Logo['webgl-bouncing'] = function(logo){
 	this.logo = logo;
 	this.started = 0;
 	this.leaving = 0;
 };
 
-var proto = Q42Logo['webgl-demo'].prototype = Object.create(Q42Logo.WebGL.prototype);
+var proto = Q42Logo['webgl-bouncing'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
 // Custom variable used in shaders, the value is the size of the actual value
 // 1: float, 2: vec2(x,y), 3: vec3(x,y,z)/(r,g,b), 4: vec4(x,y,z,w)/(r,g,b,a)
 proto.uniforms['amp'] = 1;
 
-// The vertex shader transforms vertex coordinates to on-screen pixels
 proto.vertexShader = [
-	// x, y position for each vertex
 	"attribute vec2 pos;",
-
-	// timestamp in MS
 	"uniform float time;",
-
-	// Effect amplitude
+  "varying float timeVar;",
 	"uniform float amp;",
-
-	// Logo width, height ratio for correct rendering
-	"uniform vec2 ratio;",
-
-	// Mouse position [x,y], where center is [0,0]
 	"uniform vec2 mousePos;",
-
-	// Send the vector to the fragment shader
+	"varying vec2 mousePosF;",
+	"varying float ampF;",
+	"varying float timeF;",
+	"uniform vec2 ratio;",
 	"varying vec4 position;",
-
-	// timestamp in MS from vertex shader
-	"varying float timeVar;",
-
-	// This function runs for _every_ vector in the shape
 	"void main()",
 	"{",
 			// This variable is shared with the fragment shader
 			// The 4th position is used for clipping-- irrelevant here, keep it at 1
-			"position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
+			"position = vec4(pos.x*ratio.x*.5, pos.y*ratio.y*.5, 0.0, 1.0);",
 
 			// Share time with fragment shader
 			"timeVar = time;",
 
-			// Manipulate the x-position of this vertex based on time
-			"position.x *= sin(time*.005);",
+			// Manipulate the position of this vertex based on time
+			"float bla = abs(sin(time*.005));",
+			"position.y += bla * .6 * (position.y + 1.0);",
+			"position.y += position.y * -.3;",
+			"position.y += bla * .7;",
+			"position.y += max(-.7, min(-.7, position.y));",
 
 			// gl_Position is the default output variable
 			"gl_Position = position;",
@@ -69,9 +60,9 @@ proto.fragmentShader = [
 	"void main()",
 	"{",
 			// Play with the colours
-			"float red = mainCol.r * sin(timeVar*.002);",
-			"float green = mainCol.g * sin(timeVar*.01);",
-			"float blue = mainCol.b * sin(timeVar*.04);",
+			"float red = abs(cos(timeVar*.0012));",
+			"float green = abs(cos(timeVar*.0016));",
+			"float blue = abs(cos(timeVar*.0029));",
 
 			// Output is RGBA
 			"gl_FragColor = vec4(red, green, blue, 1.0);",
