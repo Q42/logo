@@ -91,5 +91,5 @@ window['Q42Logo'] = Q42Logo;
 
 // Default <q42-logo> css
 var style = document.createElement('style');
-style.textContent = 'q42 { display: inline-block; } q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
+style.textContent = 'q42 { display: inline-block; vertical-align: bottom; position: relative; } q42:not(.fill) > canvas { position: absolute; top: 0px; left: 0px; }; q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);

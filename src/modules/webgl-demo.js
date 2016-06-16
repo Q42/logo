@@ -15,6 +15,9 @@ var proto = Q42Logo[MODULE_NAME].prototype = Object.create(Q42Logo.WebGL.prototy
 // Set author
 proto.author = MODULE_AUTHOR;
 
+// Margin, in px
+proto.margin = 0;
+
 // Custom variable used in shaders, the value is the size of the actual value
 // 1: float, 2: vec2(x,y), 3: vec3(x,y,z)/(r,g,b), 4: vec4(x,y,z,w)/(r,g,b,a)
 proto.uniforms['amp'] = 1;
