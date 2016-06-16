@@ -33,6 +33,8 @@ proto.fragmentShader = [
 	"varying float ampF;",
 	"varying vec2 mousePosF;",
 	"varying vec3 position;",
+	"const vec4 white = vec4(1.,1.,1.,1.);",
+	"const vec4 transparent = vec4(0.,0.,0.,0.);",
 	"void main()",
 	"{",
 		"float mouseDist = length(mousePosF);",
@@ -41,9 +43,8 @@ proto.fragmentShader = [
 		"color.g = (1.-ampF) * mainCol.g + ampF * (mainCol.g + position.z);",
 		"color.b = (1.-ampF) * mainCol.b + ampF * (mainCol.b + position.y);",
 
-		"if(mainCol.rgb == vec3(1.,1.,1.)) {",
-			"color.rgb = (1.-ampF) * color.rgb + ampF * vec3(0.,0.,0.);",
-			"color.a = 1.-ampF;",
+		"if(mainCol == white.rgb) {",
+				"color = (1.-ampF) * white + ampF * transparent;",
 		"}",
 
 		"gl_FragColor = color;",
