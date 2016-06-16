@@ -72,7 +72,7 @@ a {
   text-align: justify;
 }
 
-#factsheet {
+.blue {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -80,8 +80,8 @@ a {
   color: white;
 }
 
-#factsheet h1,
-#factsheet p {
+.blue h1,
+.blue p {
   width: 600px;
   margin: 0 auto;
   padding: 1em 0;
@@ -144,8 +144,8 @@ a {
     font-size: 24px;
   }
 
-  #factsheet h1,
-  #factsheet p {
+  .blue h1,
+  .blue p {
     width: 90%;
     margin: 0 auto;
     padding: 1em 0;
