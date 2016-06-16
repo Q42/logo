@@ -36,11 +36,17 @@ proto.fragmentShader = [
 	"void main()",
 	"{",
 		"float mouseDist = length(mousePosF);",
-		"vec3 color = mainCol;",
+		"vec4 color = vec4(mainCol,1.);",
 		"color.r = (1.-ampF) * mainCol.r + ampF * (mainCol.r + mouseDist * 1. + position.x);",
 		"color.g = (1.-ampF) * mainCol.g + ampF * (mainCol.g + position.z);",
 		"color.b = (1.-ampF) * mainCol.b + ampF * (mainCol.b + position.y);",
-		"gl_FragColor = vec4(color , 1.0);",
+
+		"if(mainCol.rgb == vec3(1.,1.,1.)) {",
+			"color.rgb = (1.-ampF) * color.rgb + ampF * vec3(0.,0.,0.);",
+			"color.a = 1.-ampF;",
+		"}",
+
+		"gl_FragColor = color;",
 	"}"
 ].join("\n");
 
