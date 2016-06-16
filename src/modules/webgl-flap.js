@@ -6,6 +6,8 @@ Q42Logo['webgl-flap'] = function(logo){
 
 var proto = Q42Logo['webgl-flap'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
+proto.author = 'Sjoerd';
+
 proto.uniforms['amp'] = 1;
 
 proto.vertexShader = [

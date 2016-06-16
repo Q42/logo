@@ -7,9 +7,7 @@ body {
 q42 {
 	width: 25%;
 	height: 29vh;
-	margin: 1vh;
-	padding: 1vh;
-	box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+	margin: 8vh 3vh;
 }
 q42[theme="white"] {
 	background: #444;

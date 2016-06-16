@@ -10,14 +10,27 @@
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<link rel="stylesheet" type="text/css" href="demo.css" />
+		<style>
+			q42 {
+				width: 25%;
+				height: 29vh;
+				margin: 1vh;
+				padding: 1vh;
+				box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+			}
+		</style>
 	</head>
 
 	<body>
+		<q42></q42>
+		<q42 renderer="svg" theme="white"></q42>
+		<q42 renderer="svg" theme="black"></q42>
+		<q42 renderer="canvas-demo" theme="black"></q42>
+		<q42 renderer="canvas-demo"></q42>
+		<q42 renderer="canvas-demo" theme="white"></q42>
+		<q42 renderer="webgl-freak" theme="white"></q42>
+		<q42 renderer="webgl-freak" theme="black"></q42>
 		<q42 renderer="webgl-freak"></q42>
-		<q42 renderer="webgl-wave"></q42>
-		<q42 renderer="webgl-flap"></q42>
-		<q42 renderer="webgl-demo"></q42>
-		<q42 renderer="webgl-bouncing"></q42>
 
 		<!-- <script src="../q42.js" async></script> -->
 		<script src="../src/logo.js"></script>
@@ -25,11 +38,8 @@
 		<script src="../src/svg.js"></script>
 		<script src="../src/canvas2d.js"></script>
 		<script src="../src/webgl.js"></script>
+		<script src="../src/modules/canvas-demo.js"></script>
 		<script src="../src/modules/webgl-freak.js"></script>
-		<script src="../src/modules/webgl-wave.js"></script>
-		<script src="../src/modules/webgl-flap.js"></script>
-		<script src="../src/modules/webgl-demo.js"></script>
-		<script src="../src/modules/webgl-bouncing.js"></script>
 		<script src="../src/embeds.js"></script>
 	</body>
 </html>

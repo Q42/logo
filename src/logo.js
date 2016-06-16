@@ -1,3 +1,12 @@
+// The library of renderers
+// Add yours if you want it included in random selection for plain <q42></q42>
+var Renderers = [
+	'webgl-freak',
+	'webgl-wave',
+	'webgl-flap',
+	'webgl-bouncing'
+];
+
 // Logo main constructor
 function Q42Logo(element){
 	this.element = element;
@@ -18,14 +27,30 @@ function Q42Logo(element){
 			break;
 	}
 
-	element.setAttribute('title', 'Q42');
+	this.rendererName = this.element.getAttribute('renderer');
+
+	// If no renderer specified, pick a random one from Renderers
+	if(!this.rendererName)
+		this.rendererName = Renderers[Math.round(Math.random() * (Renderers.length - 1))];
+
+	if(!Q42Logo[this.rendererName]) {
+		console.warn('No renderer ' + this.rendererName + ' found.');
+		this.element.setAttribute('renderer', this.rendererName = 'svg');
+	}
+
+	this.renderer = new Q42Logo[this.rendererName](this);
+
+	// Prototype bindings to instance
+	this.setSize = this.setSize.bind(this);
+	this.setSizeDeferred = this.setSizeDeferred.bind(this);
+
+	// Credits and a11y
+	element.setAttribute('title', 'Q42' + (this.renderer.author && ' (by ' + this.renderer.author + ')' || ''));
 	element.setAttribute('role', 'logo');
 	element.setAttribute('aria-role', 'image');
 	element.setAttribute('aria-label', 'Q42 Logo');
 
-	this.preload();
-
-	// internals
+	// Internals
 	this._setSizeAf = null;
 
 	this.init();
@@ -36,17 +61,6 @@ Q42Logo.prototype = {
 	width: 100/3*2,
 	height: 100/3*2 * 500/333.2,
 	ratio: window.devicePixelRatio || 1,
-
-	preload: function(){
-		if(!this.element.getAttribute('renderer')) this.element.setAttribute('renderer', 'svg');
-
-		this.rendererName = this.element.getAttribute('renderer');
-		this.renderer = Q42Logo[this.rendererName] && new Q42Logo[this.rendererName](this) || new Q42Logo['svg'](this);
-
-		// prototype bindings to instance
-		this.setSize = this.setSize.bind(this);
-		this.setSizeDeferred = this.setSizeDeferred.bind(this);
-	},
 
 	init: function(){
 		this.renderer.init && this.renderer.init();
@@ -77,5 +91,5 @@ window['Q42Logo'] = Q42Logo;
 
 // Default <q42-logo> css
 var style = document.createElement('style');
-style.textContent = 'q42 { display: inline-block; } q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
+style.textContent = 'q42 { display: inline-block; vertical-align: bottom; position: relative; } q42:not(.fill) > canvas { position: absolute; top: 0px; left: 0px; }; q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
 document.head.insertBefore(style, document.head.firstChild);

@@ -9,19 +9,30 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<link rel="stylesheet" type="text/css" href="../style.css">
+		<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="demo.css" />
 	</head>
 
 	<body>
-		<q42></q42>
-		<q42 theme="white"></q42>
-		<q42 theme="black"></q42>
-		<q42 renderer="canvas-demo" theme="black"></q42>
-		<q42 renderer="canvas-demo"></q42>
-		<q42 renderer="canvas-demo" theme="white"></q42>
-		<q42 renderer="webgl-freak" theme="white"></q42>
-		<q42 renderer="webgl-freak" theme="black"></q42>
+		<section>
+			<h1>Q42 logo demos</h1>
+			<div class="logo-container">
+				<h2>Random logo (gewoon <code>&lt;q42&gt;&lt;/q42&gt;)</code></h2>
+				<q42></q42>
+			</div>
+			<p>Maak je eigen logo-animatie! Om ermee te spelen, check de source of <a href="https://github.com/Q42/logo/" target="_blank">GitHub</a>.</p>
+		</section>
+		<section class="blue">
+			<h1>WebGL demo's</h1>
+			<p>Copy &amp; paste de democode van <a href="https://github.com/Q42/logo/blob/master/src/modules/webgl-demo.js" target="_blank"><code>/src/modules/webgl-demo.js</code></a> naar je eigen module en ga los.</p>
+		</section>
 		<q42 renderer="webgl-freak"></q42>
+		<q42 renderer="webgl-wave"></q42>
+		<q42 renderer="webgl-flap"></q42>
+		<q42 renderer="webgl-demo"></q42>
+		<q42 renderer="webgl-bouncing"></q42>
 
 		<!-- <script src="../q42.js" async></script> -->
 		<script src="../src/logo.js"></script>
@@ -31,6 +42,9 @@
 		<script src="../src/webgl.js"></script>
 		<script src="../src/modules/webgl-freak.js"></script>
 		<script src="../src/modules/webgl-wave.js"></script>
+		<script src="../src/modules/webgl-flap.js"></script>
+		<script src="../src/modules/webgl-demo.js"></script>
+		<script src="../src/modules/webgl-bouncing.js"></script>
 		<script src="../src/embeds.js"></script>
 	</body>
 </html>

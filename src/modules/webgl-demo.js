@@ -1,10 +1,22 @@
-Q42Logo['webgl-demo'] = function(logo){
+// Fill these out first
+var MODULE_NAME = 'webgl-demo'; // your module id
+var MODULE_AUTHOR = 'demo'; // your name/twitter
+
+// WebGL logo boilerplate
+Q42Logo[MODULE_NAME] = function(logo){
 	this.logo = logo;
 	this.started = 0;
 	this.leaving = 0;
 };
 
-var proto = Q42Logo['webgl-demo'].prototype = Object.create(Q42Logo.WebGL.prototype);
+// Copy the prototype of the boilerplate
+var proto = Q42Logo[MODULE_NAME].prototype = Object.create(Q42Logo.WebGL.prototype);
+
+// Set author
+proto.author = MODULE_AUTHOR;
+
+// Margin, in px
+proto.margin = 0;
 
 // Custom variable used in shaders, the value is the size of the actual value
 // 1: float, 2: vec2(x,y), 3: vec3(x,y,z)/(r,g,b), 4: vec4(x,y,z,w)/(r,g,b,a)
@@ -30,8 +42,11 @@ proto.vertexShader = [
 	// Send the vector to the fragment shader
 	"varying vec4 position;",
 
-	// timestamp in MS from vertex shader
+	// Timestamp in ms from vertex shader
 	"varying float timeVar;",
+
+	// The amplitude of your effect (when mouse-overed) (0-1)
+	"varying float ampF;",
 
 	// This function runs for _every_ vector in the shape
 	"void main()",
@@ -40,8 +55,9 @@ proto.vertexShader = [
 			// The 4th position is used for clipping-- irrelevant here, keep it at 1
 			"position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
 
-			// Share time with fragment shader
+			// Send needed variables to fragment shader
 			"timeVar = time;",
+			"ampF = amp;",
 
 			// Manipulate the x-position of this vertex based on time
 			"position.x *= cos(time*.005);",
@@ -51,30 +67,51 @@ proto.vertexShader = [
 	"}"
 ].join("\n");
 
-// The fragment shader gives the pixels their actual colour
+// The fragment shader gives the pixels their actual color
 proto.fragmentShader = [
 	// Some default boilerplate mumbo-jumbo
 	"precision mediump float;",
 
-	// The colour as passed from Javascript
+	// The color as passed from Javascript
 	"uniform vec3 mainCol;",
 
 	// timestamp in MS from vertex shader
 	"varying float timeVar;",
 
+	// The amplitude of your effect
+	"varying float ampF;",
+
 	// The shared vector position from the vertex shader
 	"varying vec4 position;",
+
+	// Color definitions
+	"const vec4 white = vec4(1.,1.,1.,1.);",
+	"const vec4 transparent = vec4(0.,0.,0.,0.);",
 
 	// This runs for _every_ pixel drawn
 	"void main()",
 	"{",
-			// Play with the colours
-			"float red = mainCol.r * cos(timeVar*.002);",
-			"float green = mainCol.g * cos(timeVar*.01);",
-			"float blue = mainCol.b * cos(timeVar*.04);",
+			// The output color, inherit from main color
+			"vec4 color = vec4(mainCol,1.);",
 
-			// Output is RGBA
-			"gl_FragColor = vec4(red, green, blue, 1.0);",
+			// Play with the colors
+			"color.r = mainCol.r * cos(timeVar*.002);",
+			"color.g = mainCol.g * cos(timeVar*.01);",
+			"color.b = mainCol.b * cos(timeVar*.04);",
+
+			// What to do with the white letters
+			//"if(mainCol == white.rgb) {",
+				// ampF becomes 1 when hovered
+
+				// Keep them white,
+				//"color = white;",
+
+				// ..or make them transparent on hover
+				//"color = (1.-ampF) * white + ampF * transparent;",
+			//"}",
+
+			// gl_FragColor is the color rendered on screen
+			"gl_FragColor = color;",
 	"}"
 ].join("\n");
 
