@@ -6,6 +6,8 @@ Q42Logo['webgl-wave'] = function(logo){
 
 var proto = Q42Logo['webgl-wave'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
+proto.author = 'Sjoerd';
+
 proto.uniforms['amp'] = 1;
 
 proto.vertexShader = [

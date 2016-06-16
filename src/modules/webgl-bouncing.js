@@ -6,6 +6,8 @@ Q42Logo['webgl-bouncing'] = function(logo){
 
 var proto = Q42Logo['webgl-bouncing'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
+proto.author = 'Katja';
+
 // Custom variable used in shaders, the value is the size of the actual value
 // 1: float, 2: vec2(x,y), 3: vec3(x,y,z)/(r,g,b), 4: vec4(x,y,z,w)/(r,g,b,a)
 proto.uniforms['amp'] = 1;

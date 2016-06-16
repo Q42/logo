@@ -6,6 +6,8 @@ Q42Logo['webgl-freak'] = function(logo){
 
 var proto = Q42Logo['webgl-freak'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
+proto.author = 'Marcel';
+
 proto.uniforms['amp'] = 1;
 
 proto.vertexShader = [

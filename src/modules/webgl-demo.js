@@ -1,6 +1,6 @@
 // Fill these out first
 var MODULE_NAME = 'webgl-demo'; // your module id
-var MODULE_AUTHOR = ''; // your name/twitter
+var MODULE_AUTHOR = 'demo'; // your name/twitter
 
 // WebGL logo boilerplate
 Q42Logo[MODULE_NAME] = function(logo){

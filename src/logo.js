@@ -18,12 +18,12 @@ function Q42Logo(element){
 			break;
 	}
 
-	element.setAttribute('title', 'Q42');
+	this.preload();
+
+	element.setAttribute('title', 'Q42' + (this.renderer.author && ' (by ' + this.renderer.author + ')' || ''));
 	element.setAttribute('role', 'logo');
 	element.setAttribute('aria-role', 'image');
 	element.setAttribute('aria-label', 'Q42 Logo');
-
-	this.preload();
 
 	// internals
 	this._setSizeAf = null;
