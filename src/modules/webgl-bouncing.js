@@ -25,11 +25,11 @@ proto.vertexShader = [
 	"{",
 			// This variable is shared with the fragment shader
 			// The 4th position is used for clipping-- irrelevant here, keep it at 1
-			"position = vec4(pos.x*ratio.x*.5, pos.y*ratio.y*.5, 0.0, 1.0);",
+			"position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
 
 			// Share time with fragment shader
 			"timeVar = time;",
-
+      //"position = vec4(pos.x*ratio.x*.5, pos.y*ratio.y*.5, 0.0, 1.0);",
 			// Manipulate the position of this vertex based on time
 			"float bla = abs(sin(time*.005));",
 			"position.y += bla * .6 * (position.y + 1.0);",
