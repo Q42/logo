@@ -46,6 +46,7 @@ Q42Logo.WebGL.prototype = {
 
 		this.animating = false;
 		this.scale = 1;
+		if(this.margin) this.element.style.pointerEvents = 'none';
 
 		this['uniformValues'] = this.uniformValues = {};
 		this.uniformRefs = {};
@@ -62,6 +63,7 @@ Q42Logo.WebGL.prototype = {
 		}
 
 		this.uniformValues['mainCol'] = new Float32Array(color);
+		this.uniformValues['scale'] = new Float32Array([1]);
 
 		this.af = null;
 
@@ -79,20 +81,26 @@ Q42Logo.WebGL.prototype = {
 
 	setSize: function(){
 		if(this.error) return;
-		var width = this.logo.element.clientWidth * this.logo.ratio + this.margin;
-		var height = this.logo.element.clientHeight * this.logo.ratio + this.margin;
+		var elWidth = this.logo.element.clientWidth;
+		var elHeight = this.logo.element.clientHeight;
+		var width = (elWidth + this.margin * 2) * this.logo.ratio;
+		var height = (elHeight + this.margin * 2) * this.logo.ratio;
 
 		if(this.margin) {
-			this.element.style.marginTop = -this.margin/2 + 'px';
-			this.element.style.marginLeft = -this.margin/2 + 'px';
+			this.element.style.marginTop = -this.margin + 'px';
+			this.element.style.marginLeft = -this.margin + 'px';
 			if(this['uniformValues']['scale']) {
-				var max = Math.max(height+this.margin/2,width-this.margin/2);
-				this['uniformValues']['scale'][0] = this.scale = max/(max+this.margin*2);
+				var min = Math.min(elWidth,elHeight);
+				if(elHeight / elWidth > 1) min *= this.logo.aspect;
+				if(min > elHeight) min = elHeight;
+				this['uniformValues']['scale'][0] = this.scale = min/(min+this.margin*2);
 			}
 		}
 
 		this.element.width = width;
 		this.element.height = height;
+		this.element.style.width = width / this.logo.ratio + 'px';
+		this.element.style.height = height / this.logo.ratio + 'px';
 
 		// Fix for failing iOS
 		var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
