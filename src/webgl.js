@@ -82,7 +82,7 @@ Q42Logo.WebGL.prototype = {
 	setSize: function(){
 		if(this.error) return;
 		var elWidth = this.logo.element.clientWidth;
-		var elHeight = this.logo.element.clientHeight;
+		var elHeight = this.logo.element.clientHeight || elWidth * this.logo.aspect;
 		var width = (elWidth + this.margin * 2) * this.logo.ratio;
 		var height = (elHeight + this.margin * 2) * this.logo.ratio;
 
