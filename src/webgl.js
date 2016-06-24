@@ -87,8 +87,7 @@ Q42Logo.WebGL.prototype = {
 		var height = (elHeight + this.margin * 2) * this.logo.ratio;
 
 		if(this.margin) {
-			this.element.style.marginTop = -this.margin + 'px';
-			this.element.style.marginLeft = -this.margin + 'px';
+			this.element.style.margin = -this.margin + 'px';
 			if(this['uniformValues']['scale']) {
 				var min = Math.min(elWidth,elHeight);
 				if(elHeight / elWidth > 1) min *= this.logo.aspect;
