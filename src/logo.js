@@ -27,6 +27,8 @@ function Q42Logo(element){
 			break;
 	}
 
+	this.showCredits = this.element.getAttribute('show-credits') !== null;
+
 	this.rendererName = this.element.getAttribute('renderer');
 
 	// If no renderer specified, pick a random one from Renderers
@@ -45,7 +47,7 @@ function Q42Logo(element){
 	this.setSizeDeferred = this.setSizeDeferred.bind(this);
 
 	// Credits and a11y
-	element.setAttribute('title', 'Q42' + (this.renderer.author && ' (by ' + this.renderer.author + ')' || ''));
+	element.setAttribute('title', 'Q42' + (this.showCredits && this.renderer.author && ' (by ' + this.renderer.author + ')' || ''));
 	element.setAttribute('role', 'logo');
 	element.setAttribute('aria-role', 'image');
 	element.setAttribute('aria-label', 'Q42 Logo');
