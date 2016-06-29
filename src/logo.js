@@ -27,8 +27,6 @@ function Q42Logo(element){
 			break;
 	}
 
-	this.showCredits = this.element.getAttribute('show-credits') !== null;
-
 	this.rendererName = this.element.getAttribute('renderer');
 
 	// If no renderer specified, pick a random one from Renderers
@@ -47,6 +45,7 @@ function Q42Logo(element){
 	this.setSizeDeferred = this.setSizeDeferred.bind(this);
 
 	// Credits and a11y
+	this.showCredits = this.element.getAttribute('show-credits') !== null;
 	element.setAttribute('title', 'Q42' + (this.showCredits && this.renderer.author && ' (by ' + this.renderer.author + ')' || ''));
 	element.setAttribute('role', 'logo');
 	element.setAttribute('aria-role', 'image');
@@ -67,10 +66,10 @@ Q42Logo.prototype = {
 	init: function(){
 		this.renderer.init && this.renderer.init();
 		if(this.renderer.error) {
-			console.warn('Renderer [' + this.rendererName + '] gave error, defaulting to SVG.');
-			this.element.removeAttribute('renderer');
-			this.preload();
-			this.init();
+			console.warn('Renderer [' + this.rendererName + '] gave error ' + this.renderer.error, defaulting to SVG.');
+			this.element.setAttribute('renderer', this.rendererName = 'svg');
+			this.renderer = new Q42Logo[this.rendererName](this);
+			return this.init();
 		}
 
 		addEventListener('resize', this.setSize);
@@ -93,5 +92,5 @@ window['Q42Logo'] = Q42Logo;
 
 // Default <q42-logo> css
 var style = document.createElement('style');
-style.textContent = 'q42 { display: inline-block; vertical-align: bottom; position: relative; } q42 > canvas { position: relative; }; q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
+style.textContent = 'q42 { display: inline-block; vertical-align: bottom; position: relative; } q42:hover > canvas { z-index: 100; } q42 > canvas { pointer-events: none; position: relative; }; q42 > .fill { width: 100%; height: 100%; }';
 document.head.insertBefore(style, document.head.firstChild);
