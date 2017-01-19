@@ -101,14 +101,6 @@ Q42Logo.WebGL.prototype = {
 		this.element.style.width = width / this.logo.ratio + 'px';
 		this.element.style.height = height / this.logo.ratio + 'px';
 
-		// Fix for failing iOS
-		var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-		if(iOS) {
-			var style = window.getComputedStyle(this.logo.element, null);
-			this.element.style.width = parseInt(style.getPropertyValue('width')) - 1 + 'px';
-			this.element.style.height = parseInt(style.getPropertyValue('height')) - 1 + 'px';
-		}
-
 		this.render();
 	},
 
