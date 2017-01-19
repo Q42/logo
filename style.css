@@ -109,6 +109,7 @@ a {
   text-overflow: ellipsis;
   display: inline-block;
   max-width: 100%;
+  vertical-align: -4px;
 }
 
 #getit .arrow {
