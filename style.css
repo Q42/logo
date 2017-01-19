@@ -103,6 +103,13 @@ a {
   font: bold 14px monospace;
   padding: 0.3em;
 }
+#getit .code .truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
 
 #getit .arrow {
   padding: 0 0 0 4em;
