@@ -2,6 +2,14 @@
 
 The world's first code logo.
 
+## Compile
+
+`compile.sh` creates the final q42.js
+
+## Deploy
+
+`deploy.sh` compiles and deploys to static.q42.nl, assuming you have access rights to it
+
 ## How to create a canvas2d module
 
 * Duplicate `canvas-demo.js`
