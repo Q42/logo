@@ -34,7 +34,6 @@ function Q42Logo(element){
 	// Credits and a11y
 	element.setAttribute('title', 'Q42');
 	element.setAttribute('role', 'img');
-	element.setAttribute('aria-role', 'img');
 	element.setAttribute('aria-label', 'Q42 Logo');
 
 	// Internals
