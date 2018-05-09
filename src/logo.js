@@ -33,8 +33,7 @@ function Q42Logo(element){
 
 	// Credits and a11y
 	element.setAttribute('title', 'Q42');
-	element.setAttribute('role', 'logo');
-	element.setAttribute('aria-role', 'image');
+	element.setAttribute('role', 'img');
 	element.setAttribute('aria-label', 'Q42 Logo');
 
 	// Internals
@@ -96,4 +95,4 @@ window['Q42Logo'] = Q42Logo;
 // Default <q42-logo> css
 var style = document.createElement('style');
 style.textContent = 'q42 { display: inline-block; vertical-align: bottom; position: relative; } q42:hover > canvas { z-index: 100; } q42 > canvas { position: relative; } q42 > .fill { width: 100%; height: 100%; pointer-events: none; }';
-document.head.insertBefore(style, document.head.firstChild);
+document.head.appendChild(style);

@@ -22,6 +22,8 @@ echo "})(window,document);" >> $target.full
 echo -n Creating $target..
 java -jar ./lib/compiler.jar --language_in ECMASCRIPT5 --compilation_level ADVANCED_OPTIMIZATIONS --js $target.full --js_output_file $target
 
+gzip -kfv $target
+
 rm $target.full
 
 echo done!

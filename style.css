@@ -76,7 +76,7 @@ a {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #000082;
+  background: #2E3561;
   color: white;
 }
 
@@ -86,6 +86,27 @@ a {
   margin: 0 auto;
   padding: 1em 0;
   color: white;
+}
+
+.green {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #513653;
+  color: white;
+}
+
+.green h1,
+.green p, 
+.green ul {
+  width: 600px;
+  margin: 0 auto;
+  padding: 1em 0;
+  color: white;
+}
+
+.green h1 {
+  color: #84bc2d;
 }
 
 #getit .copypaste {
