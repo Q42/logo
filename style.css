@@ -69,7 +69,22 @@ a {
 #manifesto h1,
 #manifesto p {
   margin: 3em 0;
-  text-align: justify;
+}
+
+#manifesto .how {
+  text-align: center;
+  font-size: 15px;
+  width: 800px;
+  margin: 0 -120px;
+  padding: 1em;
+  background: linear-gradient(#2E3561, #513653);
+  color: white;
+}
+
+#manifesto .how .code {
+  font-size: 16px;
+  font-family: monospace;
+  font-weight: bold;
 }
 
 .blue {
@@ -93,6 +108,7 @@ a {
   margin: 0;
   padding: 0;
   background: #513653;
+  background: linear-gradient(#2E3561, #513653);
   color: white;
 }
 
@@ -138,26 +154,17 @@ a {
 }
 
 #codeplaceholder {
-  background: black;
-  color: #4F4;
+  background: linear-gradient(#2E3561, #513653);
+  color:white;
   padding-bottom: 8em;
 }
 
 #codeplaceholder h1 {
-  color: #4F4;
-}
-
-#codeplaceholder a {
   color: white;
-}
-
-#colophonplaceholder {
-  background: black;
-  color: white;
-  padding-bottom: 2em;
 }
 
 #colophon {
+  padding-top: 10em;
   text-align: center;
 }
 
