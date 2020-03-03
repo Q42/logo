@@ -1,5 +1,9 @@
 /* common */
 
+* {
+  box-sizing: border-box;
+}
+
 @font-face {
    font-family: 'Proxima Nova';
    font-weight: normal;
@@ -18,13 +22,22 @@
 
 body, select, input {
   font: 20px/32px 'Proxima Nova', sans-serif;
-  color: #333;
+  color: #41453b;
+  background-color: #f3f5ee;
 }
 
 h1, h2, h3 {
   font: bold 20px 'Proxima Nova', sans-serif;
-  text-transform: uppercase;
-  color: #333;
+  color: #41453b;
+  margin: 0 0 10px 0;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+p {
+  margin: 0 0 10px 0;
 }
 
 body {
@@ -34,158 +47,95 @@ body {
 /* page elements and styles */
 
 #logo {
-  margin: 50px auto;
-  width: 30vw;
-  height: 40vh;
-  display: block;
+  width: 200px;
+}
+
+#logo-smol {
+  width: 50px;
+  margin: 0px auto;
+  margin-bottom: 20px;
 }
 
 section {
-  width: 600px;
-  margin: 0 auto;
-  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.content {
+  display: flex;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.vertical {
+  flex-direction: column;
 }
 
 h1 {
   font-size: 36px;
-  margin: 2em 0 0 0;
 }
 
 h2 {
   font-size: 24px;
-  margin: 2em 0 0 0;
+  margin-top: 40px;
 }
 
 a {
-  color: #84bc2d;
-  text-decoration: none;
+  color: #0652DD;
+  text-decoration: underline;
 }
 
-.lhead {
-  display: inline-block;
-  width: 140px;
+.logo {
+  min-width: 30%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px;
 }
 
-#manifesto h1,
-#manifesto p {
-  margin: 3em 0;
+.description {
+  min-width: 70%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 40px;
 }
 
-#manifesto .how {
+#hero {
+  background-color: #f3f5ee;
   text-align: center;
-  font-size: 15px;
-  width: 800px;
-  margin: 0 -120px;
-  padding: 1em;
-  background: linear-gradient(#2E3561, #513653);
-  color: white;
+  padding: 40px;
 }
 
-#manifesto .how .code {
-  font-size: 16px;
+#footer {
+  background-color: #f3f5ee;
+  text-align: center;
+  padding: 40px;
+}
+
+.download {
+  display: flex;
+}
+
+.link {
+  min-width: 70px;
+}
+
+hr {
+  width: 1100px;
+  max-width: 1100px;
+  border: 3px solid #f3f5ee;
+  margin: 40px auto;
+}
+
+.diap {
+  background-color: black;
+}
+
+.code {
   font-family: monospace;
-  font-weight: bold;
-}
-
-.blue {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: #2E3561;
-  color: white;
-}
-
-.blue h1,
-.blue p {
-  width: 600px;
-  margin: 0 auto;
-  padding: 1em 0;
-  color: white;
-}
-
-.green {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: #513653;
-  background: linear-gradient(#2E3561, #513653);
-  color: white;
-}
-
-.green h1,
-.green p, 
-.green ul {
-  width: 600px;
-  margin: 0 auto;
-  padding: 1em 0;
-  color: white;
-}
-
-.green h1 {
-  color: #84bc2d;
-}
-
-#getit .copypaste {
-  font: 16px monospace;
-  width: 100%;
-  color: #444;
-  background: #EEE;
-  border: 1px solid #CCC;
-  padding: 1em
-}
-
-#getit .code {
-  background: #EEE;
-  color: #333;
-  font: bold 14px monospace;
-  padding: 0.3em;
-}
-#getit .code .truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-  max-width: 100%;
-  vertical-align: -4px;
-}
-
-#getit .arrow {
-  padding: 0 0 0 4em;
-}
-
-#codeplaceholder {
-  background: linear-gradient(#2E3561, #513653);
-  color:white;
-  padding-bottom: 8em;
-}
-
-#codeplaceholder h1 {
-  color: white;
-}
-
-#colophon {
-  padding-top: 10em;
-  text-align: center;
-}
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-  section {
-    width: 90%;
-    margin: 0 auto;
-    padding: 1em 0;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  .blue h1,
-  .blue p {
-    width: 90%;
-    margin: 0 auto;
-    padding: 1em 0;
-    color: white;
-  }
-
+  background-color: #f3f5ee;
 }
