@@ -139,3 +139,15 @@ hr {
   font-family: monospace;
   background-color: #f3f5ee;
 }
+
+@media only screen and (max-width: 500px) {
+  .content {
+    flex-direction: column;
+  }
+  .logo{
+    width: 100%;
+  }
+  .description{
+    width: 100%;
+  }
+}
