@@ -6,7 +6,7 @@
     <mask id="b" fill="#fff">
       <use xlink:href="#a"/>
     </mask>
-    <use fill="#84BC2D" fill-rule="nonzero" xlink:href="#a"/>
+    <use fill="none" fill-rule="nonzero" xlink:href="#a"/>
     <path fill="#750787" fill-rule="nonzero" mask="url(#b)" d="M-.024 416.667h333V500h-333z"/>
     <path fill="#004DFF" fill-rule="nonzero" mask="url(#b)" d="M-.024 333.333h333v83.333h-333z"/>
     <path fill="#008026" fill-rule="nonzero" mask="url(#b)" d="M-.024 250h333v83.333h-333z"/>
