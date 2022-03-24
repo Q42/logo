@@ -121,7 +121,8 @@ a {
 }
 
 .link {
-  min-width: 70px;
+  min-width: 50px;
+  margin-right: 20px;
 }
 
 hr {
