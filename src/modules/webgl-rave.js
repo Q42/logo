@@ -1,20 +1,16 @@
-Q42Logo['webgl-jiri'] = function (logo) {
+Q42Logo['webgl-rave'] = function (logo) {
 	this.logo = logo;
 	this.started = 0;
 	this.leaving = 0;
 };
 
-var proto = Q42Logo['webgl-jiri'].prototype = Object.create(Q42Logo.WebGL.prototype);
+var proto = Q42Logo['webgl-rave'].prototype = Object.create(Q42Logo.WebGL.prototype);
 
 proto.author = 'Jiri';
 
 // Custom variable used in shaders, the value is the size of the actual value
 // 1: float, 2: vec2(x,y), 3: vec3(x,y,z)/(r,g,b), 4: vec4(x,y,z,w)/(r,g,b,a)
 proto.uniforms['amp'] = 1;
-
-// fetch('../src/modules/shaders/jiri.vs').then(async (r) => {
-// 	console.log("hoi got vertex shader", await r.text())
-// })
 
 proto.vertexShader = glsl`
 	attribute vec2 pos;
@@ -32,24 +28,27 @@ proto.vertexShader = glsl`
 
 	void main() {
 		position = vec4(pos.x * ratio.x, pos.y * ratio.y, 0.0, 1.0);
-		//position.x += ;
-		// vec2 posAmpNearCenter = vec2(sin(pos.x*.5*PI), cos(pos.y*.5*PI));
-		// vec2 posAmpNearCenter = vec2(sin(pos.x*.5*PI), smoothstep(-1.,-.2,pos.y)-smoothstep(-.2,1.,pos.y));
-		vec2 posAmpNearCenter = vec2(sin(pos.x*.5*PI), 1. - 1.*pow((pos.y+.4*cos(pos.y*.5*PI)), 2.));
-		
-		position.y += sin(time*.005)*.1*amp*(posAmpNearCenter.y*2.);
-		position.x += sin(time*.006)*.1*amp*(posAmpNearCenter.x);
-		position.x += sin(time*.004+pos.y*3.)*.05*amp*(pos.y*pos.y-1.);
+
+		float xAbs = abs(position.x);
+
+		vec2 offset = vec2(0., 0.);
+		offset +=
+			pow((max(position.y, 0.)), .8)
+			* vec2(
+				xAbs*.4*sign(position.x),
+				(pow(xAbs,.4) - .6) + (1.-sqrt(xAbs))*.1
+			) * amp;
+		position += vec4(offset, 0., 0.);
 
 		timeVar = time;
 		timeF = time;
 		ampF = amp;
-		// position.xy *= 1.0 - ampF * .5;
-		// float bla = ampF * abs(cos(time * .005));
-		// position.y += bla * .6 * (position.y + 1.0);
-		// position.y += ampF * position.y * -.3;
-		// position.y += bla * .7;
-		// position.y += ampF * max(-.7, min(-.7, position.y));
+		
+		vec2 posAmpNearCenter = vec2(sin(position.x*.5*PI), 1. - 1.*pow((position.y+.4*cos(position.y*.5*PI)), 2.));
+		position.y += sin(time*.024)*.03*amp*(posAmpNearCenter.y*2.);
+		position.x += sin(time*.2)*.03*amp*(posAmpNearCenter.x);
+		position.x += sin(time*.007+position.y*3.)*.05*(position.y*position.y-1.)*amp;
+
 		gl_Position = position;
 	}
 `
@@ -61,22 +60,29 @@ proto.fragmentShader = glsl`
 	varying float ampF;
 	varying float timeVar;
 	varying vec4 position;
+
+	const vec3 white = vec3(1.);
 	
 	void main() {
-		// todo: trippy patroon hiervan maken
-		// todo: light-pass om het wat 3d-gevoel te geven
-		vec3 initialColor = vec3(132.0 / 255.0, 187.0 / 255.0, 37.0 / 255.0);
-		float red = mix(initialColor.r, abs(cos(timeVar * .0012)), ampF);
-		float green = mix(initialColor.g, abs(cos(timeVar * .0016)), ampF);
-		float blue = mix(initialColor.b, abs(cos(timeVar * .0029)), ampF);
+		float x = -position.x * position.x * 2. + sin(timeVar*.0023) * cos(timeVar*.00051);
+		if (x == 0.) x = .0001;
+		float y = position.y * position.y * 2. + sin(timeVar*.0011) * cos(timeVar*.00061);
+		vec3 raveCol = vec3(
+			abs(cos(timeVar * .0029 + (1. - 1. / x * sin(10.*x)*cos(x*0.88)) + (1. - 1. / x * cos(10.*y)*3.*sin(x*1.1)))),
+			abs(cos(timeVar * .0012)*sin(timeVar*.00063)),
+			abs(cos(timeVar * .0023)*sin(timeVar*.00071) + position.x*cos(timeVar*.0005)+position.y*sin(timeVar*.0008))
+		);
+		raveCol *= mix(0.8, 1.2, abs(sin(timeVar*.9)));
 
-		if (mainCol == vec3(1.0, 1.0, 1.0)) {
-			red = 1.0;
-			green = 1.0;
-			blue = 1.0;
+		vec3 col = mix(mainCol, raveCol, ampF);
+		float a = 1.;
+
+		if (mainCol == white) {
+			col = mix(white, white - raveCol * .5, abs(sin(timeVar*.01))*ampF);
+			col = mix(white, vec3(0.), ampF);
+			a = 0.;
 		}
-		gl_FragColor = vec4(red, green, blue, 1.0);
-		// gl_FragColor = vec4(mainCol.rgb, 1.0);
+		gl_FragColor = vec4(col.rgb, a);
 	}
 `
 

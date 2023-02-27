@@ -60,24 +60,19 @@ proto.fragmentShader = glsl`
 	// The shared vector position from the vertex shader
 	varying vec4 position;
 
+	const vec3 white = vec3(1.,1.,1.);
+
 	// This runs for _every_ pixel drawn
 	void main() {
-		//amp == 1 mouse over, amp == 0 mouse leave
-		vec3 initialColor = vec3(132.0/255.0, 187.0/255.0, 37.0/255.0);
-		// Play with the colours
-		float red = initialColor.r * (1.0 - ampF) + ampF * abs(cos(timeVar*.0012));
-		float green = initialColor.g * (1.0 - ampF) + ampF * abs(cos(timeVar*.0016));
-		float blue = initialColor.b * (1.0 - ampF) + ampF * abs(cos(timeVar*.0029));
-		
-		//make letters white
-		if (mainCol == vec3(1.0,1.0,1.0)) {
-			red = 1.0;
-			green = 1.0;
-			blue = 1.0;
-		}
+		vec3 initialColor = vec3(132. / 255., 187. / 255., 37. / 255.);
+		vec3 rainbowColor = vec3(abs(cos(timeVar * .0012)), abs(cos(timeVar * .0016)), abs(cos(timeVar * .0029)));
+		// amp == 1 mouse over, amp == 0 mouse leave
+		vec3 col = mix(initialColor, rainbowColor, ampF);
 
-		// Output is RGBA
-		gl_FragColor = vec4(red, green, blue, 1.0);
+		if (mainCol == white) {
+			col = white;
+		}
+		gl_FragColor = vec4(col.rgb, 1.0);
 	}
 `
 
