@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.path
 fun rememberQ42Logo(): ImageVector {
     return remember {
         ImageVector.Builder(
-            name = "newIcon",
+            name = "Q42Logo",
             defaultWidth = 333.2.dp,
             defaultHeight = 500.dp,
             viewportWidth = 333.2f,
