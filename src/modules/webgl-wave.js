@@ -10,46 +10,47 @@ proto.author = 'Sjoerd';
 
 proto.uniforms['amp'] = 1;
 
-proto.vertexShader = [
-	"attribute vec2 pos;",
-	"uniform float time;",
-	"uniform float amp;",
-	"uniform vec2 mousePos;",
-	"varying vec2 mousePosF;",
-	"varying float ampF;",
-	"varying float timeF;",
-	"uniform vec2 ratio;",
-	"varying vec3 position;",
-	"void main()",
-	"{",
-		"float offset = .02 * cos(time/100. - pos.x*5. + pos.y*15.);",
-		"position = vec3(pos,0.) + amp * vec3(pos.x*offset,pos.y*offset,0.);",
-		"position.xy *= ratio;",
-		"mousePosF = mousePos;",
-		"ampF = amp;",
-		"timeF = time;",
-		"gl_Position = vec4(position,1.0);",
-	"}"
-].join("\n");
+proto.vertexShader = glsl`
+	attribute vec2 pos;
+	uniform float time;
+	uniform float amp;
+	uniform vec2 mousePos;
+	varying vec2 mousePosF;
+	varying float ampF;
+	varying float timeF;
+	uniform vec2 ratio;
+	varying vec3 position;
 
-proto.fragmentShader = [
-	"precision mediump float;",
-	"uniform vec3 mainCol;",
-	"varying float ampF;",
-	"varying vec2 mousePosF;",
-	"varying float timeF;",
-	"varying vec3 position;",
-	"void main()",
-	"{",
-		"float mouseDist = length(mousePosF);",
-		"vec3 color = mainCol;",
-		"float lighten = .15*sin(timeF/100. - position.x*5. + position.y*15.);",
-		"color.r = mainCol.r + ampF * lighten;",
-		"color.g = mainCol.g + ampF * lighten;",
-		"color.b = mainCol.b + ampF * lighten;",
-		"gl_FragColor = vec4(color , 1.0);",
-	"}"
-].join("\n");
+	void main() {
+		float offset = .02 * cos(time/100. - pos.x*5. + pos.y*15.);
+		position = vec3(pos,0.) + amp * vec3(pos.x*offset,pos.y*offset,0.);
+		position.xy *= ratio;
+		position.z *= .001;
+		mousePosF = mousePos;
+		ampF = amp;
+		timeF = time;
+		gl_Position = vec4(position,1.0);
+	}
+`
+
+proto.fragmentShader = glsl`
+	precision mediump float;
+	uniform vec3 mainCol;
+	varying float ampF;
+	varying vec2 mousePosF;
+	varying float timeF;
+	varying vec3 position;
+
+	void main() {
+		float mouseDist = length(mousePosF);
+		vec3 color = mainCol;
+		float lighten = .15*sin(timeF/100. - position.x*5. + position.y*15.);
+		color.r = mainCol.r + ampF * lighten;
+		color.g = mainCol.g + ampF * lighten;
+		color.b = mainCol.b + ampF * lighten;
+		gl_FragColor = vec4(color , 1.0);
+	}
+`
 
 proto.initModule = function(){
 	this.logo.element.addEventListener('mouseenter', this.enter.bind(this));
