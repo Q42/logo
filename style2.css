@@ -4,30 +4,18 @@
   box-sizing: border-box;
 }
 
-@font-face {
-   font-family: 'Proxima Nova';
-   font-weight: normal;
-   src: url('fonts/proxima_nova_regular.woff');
-}
-
-@font-face {
-   font-family: 'Proxima Nova';
-   font-weight: bold;
-   src: url('fonts/proxima_nova_extrabold.woff') format('woff');
-}
-
 .q-green {
   color: #84bc2d;
 }
 
 body, select, input {
-  font: 20px/32px 'Proxima Nova', sans-serif;
+  font: 20px/32px 'Outfit', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
   color: #41453b;
   background-color: #f3f5ee;
 }
 
 h1, h2, h3 {
-  font: bold 20px 'Proxima Nova', sans-serif;
+  font: bold 20px 'Outfit', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
   color: #41453b;
   margin: 0 0 10px 0;
 }
