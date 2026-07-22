@@ -3,6 +3,8 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	/* ↓ Uncomment this line to check how the logo looks on a dark background */
+	/* background-color: rgb(40, 40, 40); */
 }
 q42 {
 	width: 25%;
