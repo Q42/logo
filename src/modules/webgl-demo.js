@@ -23,97 +23,95 @@ proto.margin = 0;
 proto.uniforms['amp'] = 1;
 
 // The vertex shader transforms vertex coordinates to on-screen pixels
-proto.vertexShader = [
+proto.vertexShader = glsl`
 	// x, y position for each vertex
-	"attribute vec2 pos;",
+	attribute vec2 pos;
 
 	// timestamp in MS
-	"uniform float time;",
+	uniform float time;
 
 	// Effect amplitude
-	"uniform float amp;",
+	uniform float amp;
 
 	// Logo width, height ratio for correct rendering
-	"uniform vec2 ratio;",
+	uniform vec2 ratio;
 
 	// Mouse position [x,y], where center is [0,0]
-	"uniform vec2 mousePos;",
+	uniform vec2 mousePos;
 
 	// Send the vector to the fragment shader
-	"varying vec4 position;",
+	varying vec4 position;
 
 	// Timestamp in ms from vertex shader
-	"varying float timeVar;",
+	varying float timeVar;
 
 	// The amplitude of your effect (when mouse-overed) (0-1)
-	"varying float ampF;",
+	varying float ampF;
 
-	// This function runs for _every_ vector in the shape
-	"void main()",
-	"{",
-			// This variable is shared with the fragment shader
-			// The 4th position is used for clipping-- irrelevant here, keep it at 1
-			"position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);",
+	// This function runs for _every_ vertex in the shape
+	void main() {
+		// This variable is shared with the fragment shader
+		// The 4th position is used for clipping-- irrelevant here, keep it at 1
+		position = vec4(pos.x*ratio.x,pos.y*ratio.y,0.0,1.0);
 
-			// Send needed variables to fragment shader
-			"timeVar = time;",
-			"ampF = amp;",
+		// Send needed variables to fragment shader
+		timeVar = time;
+		ampF = amp;
 
-			// Manipulate the x-position of this vertex based on time
-			"position.x *= cos(time*.005);",
+		// Manipulate the x-position of this vertex based on time
+		position.x *= cos(time*.005);
 
-			// gl_Position is the default output variable
-			"gl_Position = position;",
-	"}"
-].join("\n");
+		// gl_Position is the default output variable
+		gl_Position = position;
+	}
+`
 
 // The fragment shader gives the pixels their actual color
-proto.fragmentShader = [
+proto.fragmentShader = glsl`
 	// Some default boilerplate mumbo-jumbo
-	"precision mediump float;",
+	precision mediump float;
 
 	// The color as passed from Javascript
-	"uniform vec3 mainCol;",
+	uniform vec3 mainCol;
 
 	// timestamp in MS from vertex shader
-	"varying float timeVar;",
+	varying float timeVar;
 
 	// The amplitude of your effect
-	"varying float ampF;",
+	varying float ampF;
 
 	// The shared vector position from the vertex shader
-	"varying vec4 position;",
+	varying vec4 position;
 
 	// Color definitions
-	"const vec4 white = vec4(1.,1.,1.,1.);",
-	"const vec4 transparent = vec4(0.,0.,0.,0.);",
+	const vec4 white = vec4(1.,1.,1.,1.);
+	const vec4 transparent = vec4(0.,0.,0.,0.);
 
 	// This runs for _every_ pixel drawn
-	"void main()",
-	"{",
-			// The output color, inherit from main color
-			"vec4 color = vec4(mainCol,1.);",
+	void main() {
+		// The output color, inherit from main color
+		vec4 color = vec4(mainCol,1.);
 
-			// Play with the colors
-			"color.r = mainCol.r * cos(timeVar*.002);",
-			"color.g = mainCol.g * cos(timeVar*.01);",
-			"color.b = mainCol.b * cos(timeVar*.04);",
+		// Play with the colors
+		color.r = mainCol.r * cos(timeVar*.002);
+		color.g = mainCol.g * cos(timeVar*.01);
+		color.b = mainCol.b * cos(timeVar*.04);
 
-			// What to do with the white letters
-			//"if(mainCol == white.rgb) {",
-				// ampF becomes 1 when hovered
+		// What to do with the white letters
+		//"if(mainCol == white.rgb) {",
+			// ampF becomes 1 when hovered
 
-				// Keep them white,
-				//"color = white;",
+			// Keep them white,
+			//"color = white;",
 
-				// ..or make them transparent on hover
-				//"color = (1.-ampF) * white + ampF * transparent;",
-			//"}",
+			// ..or make them transparent on hover
+			//"color = (1.-ampF) * white + ampF * transparent;",
+		//"}",
 
-			// gl_FragColor is the color rendered on screen
-			"gl_FragColor = color;",
-	"}"
-].join("\n");
+		// gl_FragColor is the color rendered on screen (RGBA)
+		gl_FragColor = color;
+	}
+`
 
 
 // Module specifics -- fade-in and fade-out animation on mouse enter / leave

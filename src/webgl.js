@@ -1,4 +1,4 @@
-Q42Logo.WebGL = function(logo){
+Q42Logo.WebGL = function(logo) {
 	this.logo = logo;
 };
 
@@ -16,44 +16,42 @@ Q42Logo.WebGL.prototype = {
 		'mainCol': 3
 	},
 
-	vertexShader: [
-		"attribute vec2 pos;",
-		"uniform float time;",
-		"uniform float scale;",
-		"uniform vec2 ratio;",
-		"uniform vec2 mousePos;",
-		"void main()",
-		"{",
-				"gl_Position = vec4(pos.x*ratio.x*scale,pos.y*ratio.y*scale,0.0,1.0);",
-		"}"
-	].join("\n"),
+	vertexShader: glsl`
+		attribute vec2 pos;
+		uniform float time;
+		uniform float scale;
+		uniform vec2 ratio;
+		uniform vec2 mousePos;
+		void main() {
+			gl_Position = vec4(pos.x*ratio.x*scale,pos.y*ratio.y*scale,.0,1.0);
+		}
+	`,
 
-	fragmentShader: [
-		"precision mediump float;",
-		"uniform vec3 mainCol;",
-		"void main()",
-		"{",
-				"gl_FragColor = vec4(mainCol.r, mainCol.g, mainCol.b, 1.0);",
-		"}"
-	].join("\n"),
+	fragmentShader: glsl`
+		precision mediump float;
+		uniform vec3 mainCol;
+		void main() {
+			gl_FragColor = vec4(mainCol.r, mainCol.g, mainCol.b, 1.0);
+		}
+	`,
 
-	init: function(){
+	init: function() {
 		this.element = document.createElement('canvas');
 		this.element.className = !this.margin ? 'fill' : '';
 		this.gl = this.element.getContext('webgl') || this.element.getContext('experimental-webgl');
 		this.error = !this.gl;
-		if(this.error) return;
+		if (this.error) return;
 
 		this.animating = false;
 		this.scale = 1;
-		if(this.margin) this.element.style.pointerEvents = 'none';
+		if (this.margin) this.element.style.pointerEvents = 'none';
 
 		this['uniformValues'] = this.uniformValues = {};
 		this.uniformRefs = {};
 		this.uniformArgs = {};
 
 		var color = [0,0,0];
-		switch(this.logo.theme) {
+		switch (this.logo.theme) {
 			case 'green':
 				color = [132/255, 187/255, 37/255];
 				break;
@@ -71,7 +69,7 @@ Q42Logo.WebGL.prototype = {
 		this.draw = this.draw.bind(this);
 		this.mousemove = this.mousemove.bind(this);
 
-		if(this.initModule instanceof Function) this.initModule();
+		if (this.initModule instanceof Function) this.initModule();
 
 		this.setupGL();
 		this.logo.element.appendChild(this.element);
@@ -79,20 +77,20 @@ Q42Logo.WebGL.prototype = {
 		this.logo.element.addEventListener('touchmove', this.mousemove);
 	},
 
-	setSize: function(){
-		if(this.error) return;
+	setSize: function() {
+		if (this.error) return;
 		var elWidth = this.logo.element.clientWidth;
 		var elHeight = this.logo.element.clientHeight || elWidth * this.logo.aspect;
 		var width = (elWidth + this.margin * 2) * this.logo.ratio;
 		var height = (elHeight + this.margin * 2) * this.logo.ratio;
 
-		if(this.margin) {
+		if (this.margin) {
 			this.element.style.margin = -this.margin + 'px';
-			if(this['uniformValues']['scale']) {
-				var min = Math.min(elWidth,elHeight);
-				if(elHeight / elWidth > 1) min *= this.logo.aspect;
-				if(min > elHeight) min = elHeight;
-				this['uniformValues']['scale'][0] = this.scale = min/(min+this.margin*2);
+			if (this['uniformValues']['scale']) {
+				var min = Math.min(elWidth, elHeight);
+				if (elHeight / elWidth > 1) min *= this.logo.aspect;
+				if (min > elHeight) min = elHeight;
+				this['uniformValues']['scale'][0] = this.scale = min / (min + this.margin * 2);
 			}
 		}
 
@@ -104,8 +102,8 @@ Q42Logo.WebGL.prototype = {
 		this.render();
 	},
 
-	mousemove: function(e){
-		if(!this.uniformValues['mousePos']) return;
+	mousemove: function(e) {
+		if (!this.uniformValues['mousePos']) return;
 		e = e.touches && e.touches[0] || e;
 		var rect = e.target.getBoundingClientRect();
 		var width = this.logo.element.clientWidth + this.margin;
@@ -115,7 +113,7 @@ Q42Logo.WebGL.prototype = {
 	},
 
 	// GL part
-	setupGL: function(){
+	setupGL: function() {
 		var gl = this.gl;
 		this.program = gl.createProgram();
 		this.getShader(this.program, gl.VERTEX_SHADER, this.vertexShader);
@@ -124,10 +122,10 @@ Q42Logo.WebGL.prototype = {
 
 		// uniforms
 		this.uniformRefs.ratio = gl.getUniformLocation(this.program, 'ratio');
-		for(var x in this.uniforms) {
+		for (var x in this.uniforms) {
 			this.uniformRefs[x] = gl.getUniformLocation(this.program, x);
-			if(!this.uniformRefs[x]) continue;
-			if(!this.uniformValues[x])
+			if (!this.uniformRefs[x]) continue;
+			if (!this.uniformValues[x])
 				this.uniformValues[x] = new Float32Array(this.uniforms[x]);
 			this.uniformArgs[x] = [this.uniformRefs].concat(new Array(this.uniforms[x]));
 		}
@@ -147,7 +145,7 @@ Q42Logo.WebGL.prototype = {
 		var shader = gl.createShader(type);
 		gl.shaderSource(shader, source);
 		gl.compileShader(shader);
-		if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 			console.error(gl.getShaderInfoLog(shader));
 			gl.deleteProgram(program);
 			return;
@@ -156,44 +154,45 @@ Q42Logo.WebGL.prototype = {
 		gl.deleteShader(shader);
 	},
 
-	render: function(){
+	render: function() {
 		cancelAnimationFrame(this.af);
-		if(this.animating)
+		if (this.animating)
 			this.af = requestAnimationFrame(this.render);
 		this.draw();
 	},
 
-	draw: function(){
+	draw: function() {
 		var gl = this.gl;
 		var min = Math.min(this.element.width, this.element.height);
 
-		if(this.element.height / this.element.width > 1) min*=this.logo.aspect;
-		if(min > this.element.height) min = this.element.height;
+		if (this.element.height / this.element.width > 1) min *= this.logo.aspect;
+		if (min > this.element.height) min = this.element.height;
 
-		if(this.uniformValues['time'])
+		if (this.uniformValues['time'])
 			this.uniformValues['time'][0] = 0;
 
 		// For dynamic uniforms in modules
-		if(this.updateValues instanceof Function) this.updateValues();
+		if (this.updateValues instanceof Function) this.updateValues();
 
 		gl.viewport(0, 0, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
 		gl.useProgram(this.program);
 
 		// send uniforms
-		gl.uniform2f(this.uniformRefs.ratio, min/this.element.width, min/this.element.height);
-		for(var x in this.uniforms) {
-			if(!this.uniformRefs[x]) continue;
-			gl['uniform'+this.uniforms[x]+'f'].apply(gl, [this.uniformRefs[x]].concat(Array.prototype.slice.call(this.uniformValues[x])));
+		gl.uniform2f(this.uniformRefs.ratio, min / this.element.width, min / this.element.height);
+		for (var x in this.uniforms) {
+			if (!this.uniformRefs[x]) continue;
+			gl['uniform' + this.uniforms[x] + 'f'].apply(gl, [this.uniformRefs[x]].concat(Array.prototype.slice.call(this.uniformValues[x])));
 		}
 
 		// For white lettering
 		var attr = gl.getAttribLocation(this.program, 'pos');
-		if(this.logo.theme == 'green') {
+		if (this.logo.theme == 'green') {
 			gl.uniform3f(this.uniformRefs['mainCol'], 1, 1, 1);
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.quadBuffer);
 			gl.vertexAttribPointer(attr, 2, gl.FLOAT, false, 0, 0);
 			gl.enableVertexAttribArray(attr);
-			gl.drawArrays(gl.TRIANGLES, 0, this.whiteQuad.length/2);
+			// white quad wordt met te weinig vertices getekend, daardoor clipt hij soms op andere punten
+			gl.drawArrays(gl.TRIANGLES, 0, this.whiteQuad.length / 2);
 			gl.disableVertexAttribArray(attr);
 			gl.uniform3f(this.uniformRefs['mainCol'], this.uniformValues['mainCol'][0], this.uniformValues['mainCol'][1], this.uniformValues['mainCol'][2]);
 		}
@@ -203,13 +202,17 @@ Q42Logo.WebGL.prototype = {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.triangleBuffer);
 		gl.vertexAttribPointer(attr, 3, gl.FLOAT, false, 0, 0);
 		gl.enableVertexAttribArray(attr);
-		gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length/3);
+		gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
 		gl.disableVertexAttribArray(attr);
 	}
-
 };
 
 Q42Logo.WebGL.prototype.vertices = new Float32Array(Q42Logo.WebGL.prototype.verticesString.split(','));
 
 // for minification
 Q42Logo['webgl'] = Q42Logo.WebGL;
+
+/**
+ * No-op template tag function which tells some extensions to highlight/lint this string as GLSL. Usage: glsl`void main() {...}`)
+ */
+function glsl(x) { return x }
